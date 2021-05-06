@@ -1,0 +1,430 @@
+<!DOCTYPE >
+<html>
+	
+	<head>
+		<meta charset="utf-8">
+		<script src="../templates/js/jquery.js"></script>
+		<script src="../templates/js/echarts.js"></script>
+		<script src="../templates/js/worldcloud.js"></script>
+		<script src="../templates/js/china.js"></script>
+	</head>
+	
+	<style>
+		/*公共属性*/
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		a{text-decoration: none;color: black}
+		
+		ul,li{float: left;list-style-type: none;}
+		
+		div::-webkit-scrollbar{
+		  width:5px;
+		  height:0px;
+		}
+		
+		div::-webkit-scrollbar-thumb{
+		  background: gray;
+		  border-radius:10px;
+		}
+		
+		
+		.head_nav {
+			border-bottom: rgba(0,0,0,0.1) solid 1px;
+		}
+		
+		.head_nav .content{
+			width: 1426px;
+			margin: 0 auto;
+			padding-top: 20px;
+			
+			
+		}
+		
+		.head_nav .content .content_img{
+			float: left;
+		}
+		
+		.head_nav .content .content_img img,span{
+			float: left;
+		}
+		
+		.head_nav .content .content_img span{
+			display: block;
+			padding-top: 17px;
+			margin-left: 15px;
+			font-size: 27px;
+			font-weight: bold;
+			padding-bottom: 25px;
+		}
+		
+		.head_nav .content .content_person{
+			float: right;
+		}
+		
+		.head_nav .content .content_person .search_box{
+			border: royalblue solid 1px;
+			border-radius: 5px 5px 5px 5px;
+			margin-top: 15px;
+			padding: 10px;
+			color: royalblue;
+			cursor: pointer;
+			float: left;
+			margin-right: 30px;
+		}
+		
+		.head_nav .content .content_person img{
+			float: left;
+		}
+		
+		
+		.person_info{
+			float: left;
+			margin-top: 13px;
+			margin-left: 30px;
+		}
+		
+		.person_info img{
+			
+			
+			width: 45px;
+			border-radius: 50%;
+		}
+		
+		.person_info .user_name
+		{
+			float: left;
+			margin-left: 20px;
+		}
+		
+	</style>
+	
+	<body>
+		<div class="head_nav">
+			<div class="content">
+				<div class="content_img">
+					<img src="../templates/images/head2.png"  width="60px"/>
+					<span>
+						微博超话舆情分析系统
+					</span>
+				</div>
+				
+				<div class="content_person">
+					<div class="search_box">
+						<span>&nbsp;&nbsp;我的账户&nbsp;&nbsp;</span>
+					</div>
+					
+					<img src="../templates/images/news.png" width="30px" style="margin-top: 20px;" />
+					
+					<div class="person_info">
+						<img src="../templates/images/head_img.jpg">
+						<div class="user_name">
+							<span style="font-weight: bold;display: block;" id="user_name">BanksY ol</span>
+							<br>
+							<span style="color: rgba(0,0,0,0.7);margin-top: 3px;">AHPU</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div style="clear: both;"></div>
+		</div>
+		
+		<style>
+			.select_board{
+				width: 1426px;
+				margin: 0 auto;
+			}
+			
+			.select_board ul{
+				float: left;
+			}
+			
+			.select_board li{
+				width: 100px;
+				margin-left: 30px;
+				line-height: 65px;
+				text-align: center;
+				color: rgba(0,0,0,0.7);
+				font-weight: 500;
+				cursor: pointer;
+			}
+			
+			.select_board .hover{
+				border-bottom: rgba(0,0,0,0.2) solid 2px;
+				color: royalblue;
+			}
+			
+			.search_fun{
+				float: right;
+				width: 290px;
+				height: 40px;
+				margin-top: 13px;
+				border: rgba(0,0,0,0.1) solid 1px;
+				border-radius: 2px 2px 2px 2px;
+			}
+			
+			.select_ul{
+				float: left;
+			}
+			
+			.input100
+			{
+				border: none;
+				outline: none;
+				text-transform: none;
+				overflow: visible;
+				background: transparent;
+				line-height: 40px;
+				font-size: 17px;
+				margin-bottom: 5px;
+				margin-left: 5px;
+				float: left;
+				color: rgba(0,0,0,0.6);
+			    width: 250px;
+			}
+			
+			.search_fun img{
+				
+				margin-top: 10px;
+				cursor: pointer;
+				width: 20px;
+				margin-left: 5px;
+			}
+			
+			.lihover{
+				color: #1E90FF;
+			}
+			
+		</style>
+		
+		<div class="head_nav">
+			<div class="select_board">
+				<div class="select_ul">
+                   <ul>
+                   	  <a href="/table/"><li style="margin-left: 0;">首页</li></a>
+                   	  <a href="/hotspot/"><li>舆情关注热点</li></a>
+                   	  <a href="/view/"><li class="hover">信息概览</li></a>
+                   	  <a href="/analysis/"><li>超话分析</li></a>
+                   	  <a href="/testing/"><li>异常言论检测</li></a>
+                   	  <a href="/task/"><li>任务管理</li>  </a>
+                   	  <a href="/myaccount/"><li>我的账户</li></a>
+                   </ul>
+				</div>
+				
+				<div class="search_fun">
+					<input class="input100" type="text" name="resign_password_again" placeholder="Search...." autocomplete="off">
+					<img src="../templates/images/search.png">
+				</div>			
+			</div>
+			<div style="clear: both;"></div>
+		</div>
+		
+		<style>
+			.select_hover{
+				color: royalblue;
+				font-size: 28px;
+	
+			}
+		</style>
+		
+		<div style="margin-top: 40px;">
+			<div style="margin: 0 auto;width: 1426px;height: 730px;">
+				<div style="float: left;width: 100%;height: 60px;">
+					<div style="float: left;height: 60px;font-size: 23px;border-radius: 15px 15px 0 0;">
+						<ul style="cursor: pointer;">
+							<li style="width: 150px;line-height: 60px;text-align: center;border-radius: 15px 0 0 0;border: rgba(0,0,0,0.5) solid 1px;border-bottom: none;" class="select_hover">超话</li>
+							<li style="width: 150px;line-height: 60px;text-align: center;border-radius: 0 15px 0 0;background-color: rgba(0,0,0,0.5);">用户</li>
+						</ul>
+					</div>
+				</div>
+				
+				<div style="float: left;width: 1426px;height: 670px;background-color: rgba(0,0,0,0.5);border-radius: 0 30px 30px 30px;background: url(../templates/images/15.gif) bottom right;background-repeat: no-repeat;border: rgba(0,0,0,0.3) solid 1px;" >
+					<div style="float: left;width: 1426px;height: 670px;position: relative;">
+						<div style="position: absolute;width: 300px;height: 300px;bottom: 0;right: 0;opacity: 0.5;" id="show_img">
+							<img src="https://wx1.sinaimg.cn/thumb180/8245b061gy1gdily9h9llj20hs0hsace.jpg" style="width: 100%;height: 100%;border-radius: 50%;" >
+						</div>
+						
+						<div style="float: left;width: 600px;height: 670px;">
+							<div style="float: left;width: 100%;height: 70px;border-bottom: rgba(255,255,255,1) solid 1px;padding-left: 30px;margin-top: 20px;">
+								<span style="line-height: 70px;font-size: 20px;">本周活跃超话排名</span>
+								<img src="../templates/images/rank.png" style="width: 40px;margin-left: 10px;margin-top: 10px;">
+							</div>
+							
+							<div style="float: left;width: 550px;height: 550px;margin-top: 0px;overflow: scroll;padding-left: 30px;color: black;border: rgba(0,0,0,0.1) solid 1px;margin-left: 20px;padding-top: 15px;">
+								<ul id="rank_url" style="cursor: pointer;">
+								    <li style="display: none;">
+										<div style="width: 490px;height: 30px;margin-top: 10px;border-bottom: rgba(0,0,0,0.1) solid 1px;">
+									        <span style="margin-right: 50px;"> 1</span>
+									        <span style="width:140px;">清华大学</span>
+									        <span style="float: right;width: 50px;"> 7892</span>
+									        <span style="float: right;margin-left: 30px;"> 评论数:</span>									
+									        <span style="float: right;width: 50px;"> 500</span>
+									        <span style="float: right;"> 发帖量:</span>
+										</div>
+								    </li>
+									
+									
+									  
+								</ul>
+							</div>
+						</div>
+						
+						<div style="float: right;width: 700px;height: 600px;" id="show_board">
+							<div style="float: left;width: 700px;height: 150px;color: black;font-size: 20px;">
+								<div style="float: left;width: 100%;">
+									<span style="line-height: 150px;font-size: 50px;">超话:&nbsp;&nbsp;&nbsp;&nbsp;</span>
+									<span style="line-height: 150px;font-size: 50px;">清华大学</span>
+								</div>
+								
+								<div style="float: left;width: 100%;">
+									<span style="line-height: 30px;">总发帖:&nbsp;&nbsp;&nbsp;&nbsp;</span>
+									<span style="line-height: 30px;">1564512321</span>
+									<span style="line-height: 30px;margin-left: 30px;">总阅读:&nbsp;&nbsp;&nbsp;&nbsp;</span>
+									<span style="line-height: 30px;">156451235461</span>
+									<span style="line-height: 30px;margin-left: 30px;">总关注:&nbsp;&nbsp;&nbsp;&nbsp;</span>
+									<span style="line-height: 30px;">1512321</span>
+								</div>
+								
+								
+								<div style="float: left;width: 100%;margin-top: 30px;font-size: 35px;">
+									<span style="line-height: 50px;">本周新增发帖:&nbsp;&nbsp;&nbsp;&nbsp;</span>
+									<span style="line-height: 50px;">138</span>
+								</div>
+								
+								<div style="float: left;width: 100%;margin-top: 30px;font-size: 35px;">
+									<span style="line-height: 50px;">新增评论:&nbsp;&nbsp;&nbsp;&nbsp;</span>
+									<span style="line-height: 50px;">138</span>
+								</div>
+								
+								<div style="float: left;width: 100%;margin-top: 30px;font-size: 35px;">
+									<span style="line-height: 50px;">健康指数:&nbsp;&nbsp;&nbsp;&nbsp;</span>
+									<span style="line-height: 50px;">138</span>
+								</div>
+								
+							</div>
+						</div>
+						
+						
+					</div>
+				</div>
+				
+				
+			</div>
+			
+		</div>
+	</body>
+	<script>
+		function checkcookie()
+		{
+						 this.setCookie = function(c_name,value,expiredays)
+						 {
+							   var exdate=new Date();
+							   exdate.setDate(exdate.getDate()+expiredays);
+							   document.cookie=c_name+ "=" +escape(value)+
+							   ((expiredays==null) ? "" : ";expires="+exdate.toGMTString()) + ";path=/"
+						 }
+		
+						 this.getCookie = function(userName)
+		    {
+		       if (document.cookie.length>0){
+		            c_start=document.cookie.indexOf(userName+ "=");
+		           if (c_start!=-1){
+		               c_start=c_start + userName.length+1;
+		               c_end=document.cookie.indexOf(";",c_start);
+		           if (c_end==-1){
+		                c_end=document.cookie.length;
+		           }
+		           return unescape(document.cookie.substring(c_start,c_end));
+		           }
+		       }
+		       return "";
+		   }
+		
+						this.check = function()
+						{
+						    userName = cookie_.getCookie('userName');
+							if(userName)
+							{
+							    $.ajax({
+							     url:"/check_statu/",
+							     type:"get",
+							     dataType:"json",
+							     data:{"cookie":userName},
+							     success:function (data) {
+									 if(data.statu){
+										 $("#user_name").text(data.user_name)
+										 update_info()
+									 }
+									 else{
+										 alert("身份认证已失效，请重新登录")
+										 location.href="/sign/"
+									 }
+								}
+							    })
+							}
+							else
+							{
+								alert("身份认证已失效，请重新登录")
+								location.href="/sign/"
+							}
+						}
+		}
+		var cookie_=new checkcookie()
+		cookie_.check()
+		
+		function update_info(){
+			$.ajax({
+			 url:"/view_data/",
+			 type:"get",
+			 dataType:"json",
+			 data:{"cookie":userName},
+			 success:function (data) {
+				 produce_rank(data.data)
+				 datass = data.data
+				 show_img(0)
+			}
+			})
+		}
+		
+		function produce_rank(datas){
+			
+			parent = document.getElementById("rank_url")
+			
+			for (var i=0;i<datas.length;i++)
+			{
+				s = document.getElementById("rank_url").getElementsByTagName("li")[0].cloneNode(true)
+				s.getElementsByTagName("span")[0].innerText = i + 1 
+				s.getElementsByTagName("span")[1].innerText = datas[i][0] 
+				s.getElementsByTagName("span")[4].innerText = datas[i][1] 
+				s.getElementsByTagName("span")[2].innerText = datas[i][2] 
+				s.style.display = 'block'
+				parent.appendChild(s)
+			}
+			li_click()
+		}
+		
+		function show_img(number){
+			
+			$("#rank_url li").eq(number+1).addClass("lihover")
+			$("#rank_url li").eq(number+1).siblings().removeClass("lihover")
+			$("#show_img img").attr("src",datass[number][5])
+			$("#show_board span").eq(1).text(datass[number][0])
+			$("#show_board span").eq(3).text(datass[number][4][0])
+			$("#show_board span").eq(5).text(datass[number][4][1])
+			$("#show_board span").eq(7).text(datass[number][4][2])
+			$("#show_board span").eq(9).text(datass[number][1])
+			$("#show_board span").eq(11).text(datass[number][2])
+			$("#show_board span").eq(13).text(datass[number][3])
+		}
+		
+		function li_click(){
+			$("#rank_url li").click(
+			function(){
+				show_img($(this).index()-1)
+			})
+		}
+		
+		
+	</script>
+</html>

@@ -1,0 +1,8 @@
+Django==3.1.7
+pymongo==3.11.3
+Twisted==20.3.0
+Scrapy==2.4.1
+scrapy-redis==0.6.8
+snownlp==0.12.3
+jieba==0.42.1
+redis==3.5.3

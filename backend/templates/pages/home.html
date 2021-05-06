@@ -1,0 +1,1197 @@
+<!DOCTYPE >
+<html>
+	
+	<head>
+		<meta charset="utf-8">
+		<script src="../templates/js/jquery.js"></script>
+		<script src="../templates/js/echarts.js"></script>
+		<script src="../templates/js/worldcloud.js"></script>
+		<script src="../templates/js/china.js"></script>
+		<script src="../templates/js/wordcloud2.js"></script>
+	</head>
+	
+	<style>
+		/*公共属性*/
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		a{text-decoration: none;color: black}
+		
+		ul,li{float: left;list-style-type: none;}
+		
+		.head_nav {
+			border-bottom: rgba(0,0,0,0.1) solid 1px;
+		}
+		
+		.head_nav .content{
+			width: 1426px;
+			margin: 0 auto;
+			padding-top: 20px;
+			
+		}
+		
+		.head_nav .content .content_img{
+			float: left;
+		}
+		
+		.head_nav .content .content_img img,span{
+			float: left;
+		}
+		
+		.head_nav .content .content_img span{
+			display: block;
+			padding-top: 17px;
+			margin-left: 15px;
+			font-size: 27px;
+			font-weight: bold;
+			padding-bottom: 25px;
+		}
+		
+		.head_nav .content .content_person{
+			float: right;
+		}
+		
+		.head_nav .content .content_person .search_box{
+			border: royalblue solid 1px;
+			border-radius: 5px 5px 5px 5px;
+			margin-top: 15px;
+			padding: 10px;
+			color: royalblue;
+			cursor: pointer;
+			float: left;
+			margin-right: 30px;
+		}
+		
+		.head_nav .content .content_person img{
+			float: left;
+		}
+		
+		
+		.person_info{
+			float: left;
+			margin-top: 13px;
+			margin-left: 30px;
+		}
+		
+		.person_info img{
+			
+			
+			width: 45px;
+			border-radius: 50%;
+		}
+		
+		.person_info .user_name
+		{
+			float: left;
+			margin-left: 20px;
+		}
+		
+		.select_board{
+			width: 1426px;
+			margin: 0 auto;
+		}
+		
+		.select_board ul{
+			float: left;
+		}
+		
+		.select_board li{
+			width: 100px;
+			margin-left: 30px;
+			line-height: 65px;
+			text-align: center;
+			color: rgba(0,0,0,0.7);
+			font-weight: 500;
+			cursor: pointer;
+		}
+		
+		.select_board .hover{
+			border-bottom: rgba(0,0,0,0.2) solid 2px;
+			color: royalblue;
+		}
+		
+		.search_fun{
+			float: right;
+			width: 290px;
+			height: 40px;
+			margin-top: 13px;
+			border: rgba(0,0,0,0.1) solid 1px;
+			border-radius: 2px 2px 2px 2px;
+		}
+		
+		.select_ul{
+			float: left;
+		}
+		
+		.input100
+		{
+			border: none;
+			outline: none;
+			text-transform: none;
+			overflow: visible;
+			background: transparent;
+			line-height: 40px;
+			font-size: 17px;
+			margin-bottom: 5px;
+			margin-left: 5px;
+			float: left;
+			color: rgba(0,0,0,0.6);
+		    width: 250px;
+		}
+		
+		.search_fun img{
+			
+			margin-top: 10px;
+			cursor: pointer;
+			width: 20px;
+			margin-left: 5px;
+		}
+		
+		.today_data{
+			
+		}
+		
+		.today_data_board{
+			width: 1426px;
+		    margin: 0 auto;
+		}
+		
+		.today_nav{
+			padding-top: 30px;
+			float: left;
+			width: 100%;
+			padding-bottom: 30px;
+		}
+		
+		.today_nav span{
+			line-height: 40px;
+			font-size: 27px;
+		}
+		
+		.today_number{
+			float: left;
+			width: 100%;
+		}
+		
+		.today_number_board{
+			float: left;
+			width: 185px;
+			height: 140px;
+			margin-right: 60px;
+			box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1);
+			
+		}
+		
+		.number_1{
+			padding-top: 10px;
+			width: 100%;
+			height: 30px;
+		}
+		.number_1 span{
+			float: right;
+			line-height: 30px;
+			padding-right: 10px;
+			color: red;
+		}
+		.number_2
+		{
+			padding-top: 0px;
+			width: 100%;
+			height: 30px;
+			text-align: center;
+		}
+		.number_2 span{
+			display: block;
+			width: 100%;
+			font-size: 35px;
+			font-weight: 600;
+		}
+		
+		.number_3
+		{
+			margin-top: 20px;
+			padding-top: 3px;
+			width: 100%;
+			height: 30px;
+			text-align: center;
+		}
+		.number_3 span{
+			
+			display: block;
+			width: 100%;
+			font-size: 15px;
+			font-weight: 400;
+			color: rgba(0,0,0,0.6);
+		}
+		
+		.active{
+			float: left;
+			margin-top: 30px;
+		}
+		
+		.active_box1{
+			float: left;
+			width: 675px;
+			height: 710px;
+			box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1)
+		}
+		.box1_nav{
+			float: left;
+			width: 100%;
+			border-bottom: rgba(0,0,0,0.1) solid 1px;
+		}
+		
+		.box1_nav span{
+			line-height: 34px;
+			padding: 10px;
+			font-weight: 500;
+			color: rgba(0,0,0,0.6);
+		}
+		
+		.box1_image{
+			float: left;
+			width: 100%;
+			height: 300px;
+				
+		}
+		
+		.box1_charts{
+			float: left;
+			width: 100%;
+			height: 300px;
+		
+		}
+		
+		.box1_nav{
+			float: left;
+			width: 100%;
+			line-height: 40px;
+			height: 50px;
+		}
+		
+		.box1_nav span{
+			width: 185px;
+			display: block;
+			
+		}
+		
+		.box1_info_one{
+			float: left;
+			width: 100%;
+			height: 60px;
+			line-height: 40px;
+			color: rgba(0,0,0,0.7);
+			border:rgba(0,0,0,0.1) solid 1px;
+			
+		}
+		
+		.box1_info_one span{
+			width: 191px;
+			display: block;
+			padding: 10px;
+			padding-top: 10px;
+			
+		
+		}
+		
+		.box1_info_one img{
+			margin-top: 5px;
+			float: left;
+			width: 30px;
+			margin-right: 5px;
+		}
+		
+		.box1_info_one .detalied{
+			cursor: pointer;
+		}
+		
+		.box1_info_one .detalied span{
+			width: 60px;
+			background-color: rgba(30,144,255,0.9);
+			line-height: 20px;
+			text-align: center;
+			color: white;
+			margin-top: 5px;
+			border-radius: 10px 10px 10px 10px;
+		}
+		
+		.assess_nav
+		{
+			float: left;
+			background-color: rgba(65,105,225,0.8);
+			width: 657px;
+			line-height: 50px;
+			padding-left: 20px;
+			color: rgba(0,0,0,0.7);
+			font-weight: 600;
+			margin-bottom: 20px;
+		}
+		
+		.active_box2{
+			float: left;
+			width: 675px;
+			height: 635px;
+			
+			
+		}
+		
+		.box2_img1{
+			float: left;
+			width: 300px;
+			height: 380px;
+			box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1)
+		}
+		
+		.box2_img1 span{
+			float: left;
+			margin-left: 10px;
+		
+		}
+		
+		.box2_img1 .nav{
+			width: 100%;
+			float: left;
+			line-height: 57px;
+			border-bottom: rgba(0,0,0,0.1) solid 1px;
+		}
+		
+		.box2_img1 .shape{
+			float: left;
+			width: 100%;
+			height: 300px;
+			margin-top: 20px;
+		}
+		
+		.img3
+		{
+			width: 100%;
+			height: 450px;
+			float: left;
+			margin-top: 55px;
+			box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1)
+		}
+		
+		.img3 .board{
+			width: 100%;
+			height: 60px;
+			border-bottom: rgba(0,0,0,0.1) solid 1px;
+			line-height: 60px;
+			padding-left: 10px;
+			
+		}
+		.box3{
+			float: left;
+			width: 675px;
+			height: 190px;
+			margin-top: -240px;
+			border: rgba(0,0,0,0.1) solid 1px; 
+		}
+		
+		.box3_nav{
+			float: left;
+			width: 60px;
+			height: 100%;
+			border-right: rgba(0,0,0,0.3) solid 1px;
+		}
+		
+		.box3_nav span{
+			display: block;
+			width: 60px;
+			margin-top: 50px;
+			text-align: center;
+			color: rgba(0,0,0,0.7);
+		}
+		
+		.active_user_board
+		{
+			width: 612px;
+			height: 100%;
+			float: left;
+		}
+		
+		.active_user_board img
+		{
+			float: left;
+			height: 90px;
+			border-radius: 50%;
+		}
+		
+		.active_user_board span
+		{
+			float: left;
+			margin-right: 60px;
+		}
+		
+		.active_user_bottom{
+			height: 60px;
+			width: 100%;
+			line-height: 70px;
+			font-size: 30px;
+		}
+		.map{
+		    float: left; 
+			width: 100%;
+			height: 820px;
+			margin-bottom: 50px;
+			margin-top: 22px;
+			box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1)
+		}
+		
+		.map_nav{
+			float: left;
+			width: 100%;
+			float: left;
+			border-bottom: rgba(0,0,0,0.2) solid 1px;
+		}
+		
+		.map_nav span{
+			display: block;
+			padding-left: 30px;
+			line-height: 50px;
+			color: rgba(0,0,0,0.8);
+		}
+		
+		.map_map{
+			padding-top: 20px;
+			float: left;
+			width: 100%;
+			height: 745px;
+			
+		}
+		
+	</style>
+	
+	<body>
+		<div class="head_nav">
+			<div class="content">
+				<div class="content_img">
+					<img src="../templates/images/head2.png"  width="60px"/>
+					<span>
+						微博超话舆情分析系统
+					</span>
+				</div>
+				
+				<div class="content_person">
+					<div class="search_box">
+						<span>&nbsp;&nbsp;我的账户&nbsp;&nbsp;</span>
+					</div>
+					
+					<img src="../templates/images/news.png" width="30px" style="margin-top: 20px;" />
+					
+					<div class="person_info">
+						<img src="../templates/images/head_img.jpg">
+						<div class="user_name">
+							<span style="font-weight: bold;display: block;" id="user_name">BanksY</span>
+							<br>
+							<span style="color: rgba(0,0,0,0.7);margin-top: 3px;">AHPU</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div style="clear: both;"></div>
+		</div>
+		
+
+		
+		<div class="head_nav">
+			<div class="select_board">
+				<div class="select_ul">
+                   <ul>
+					   <a href="/table/"><li style="margin-left: 0;" class="hover">首页</li></a>
+					   <a href="/hotspot/"><li>舆情关注热点</li></a>
+					   <a href="/view/"><li>信息概览</li></a>
+					   <a href="/analysis/"><li>超话分析</li></a>
+					   <a href="/testing/"><li>异常言论检测</li></a>
+					   <a href="/task/"><li>任务管理</li>  </a>
+					   <a href="/myaccount/"><li>我的账户</li></a>
+				   </ul>
+				</div>
+				
+				<div class="search_fun">
+					<input class="input100" type="text" name="resign_password_again" placeholder="Search...." autocomplete="off">
+					<img src="../templates/images/search.png">
+				</div>
+				
+			</div>
+			
+			<div style="clear: both;"></div>
+		</div>
+		
+
+		<div class="today_data">
+			<div class="today_data_board">
+				<div class="today_nav">
+					<span>
+						今日数据
+					</span>
+				</div>
+				
+				<div class="today_number">
+					<div class="today_number_board">
+						<div class="number_1">
+							<span>6%</span>
+							<span>+</span>
+						</div>
+						
+						<div class="number_2">
+							<span>2562</span>
+						</div>
+						
+						<div class="number_3">
+							<span>发帖量</span>
+						</div>
+					</div>
+					
+					<div class="today_number_board">
+						<div class="number_1">
+							<span>6%</span>
+							<span>+</span>
+						</div>
+						
+						<div class="number_2">
+							<span>722562</span>
+						</div>
+						
+						<div class="number_3">
+							<span>阅读数</span>
+						</div>
+					</div>
+					
+					<div class="today_number_board">
+						<div class="number_1">
+							<span>6%</span>
+							<span>+</span>
+						</div>
+						
+						<div class="number_2">
+							<span>4824</span>
+						</div>
+						
+						<div class="number_3">
+							<span>新增关注度</span>
+						</div>
+					</div>
+					
+					<div class="today_number_board">
+						<div class="number_1">
+							<span>15%</span>
+							<span>+</span>
+						</div>
+						
+						<div class="number_2">
+							<span>54824</span>
+						</div>
+						
+						<div class="number_3">
+							<span>评论量</span>
+						</div>
+					</div>
+					
+					
+					<div class="today_number_board">
+						<div class="number_1">
+							<span></span>
+							<span></span>
+						</div>
+						
+						<div class="number_2">
+							<span style="color: seagreen;">8.7</span>
+						</div>
+						
+						<div class="number_3">
+							<span>今日言论健康指数</span>
+						</div>
+					</div>
+					
+					
+					
+					<div class="today_number_board" style="margin-right: 0;">
+						<div class="number_1">
+							<span></span>
+							<span></span>
+						</div>
+						
+						<div class="number_2">
+							<span>27</span>
+						</div>
+						
+						<div class="number_3">
+							<span>实时监测超话数</span>
+						</div>
+					</div>
+					
+				</div>
+
+				
+				<div class="active">
+					<div class="active_box1" style="margin-right: 60px;">
+						<div class="box1_nav">
+							<span>超话活跃度</span>
+						</div>
+						
+						<div class="box1_image" id="board_active"></div>
+						
+						<div class="box1_charts">
+							<div class="box1_nav">
+								<span style="width: 70px;"></span>
+								<span>超话</span>
+								<span >发帖量</span>
+								<span style="width: 100px;">阅读数</span>
+							</div>
+							
+							<div class="box1_info">
+								<div class="box1_info_one">
+									<span style="width: 60px;text-align: center;"></span>
+									<span>
+										<img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fae01.alicdn.com%2Fkf%2FHd605aa433ea94c7c8bf3d01968f01622b.jpg&refer=http%3A%2F%2Fae01.alicdn.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620323301&t=895b5bb00e0043a1f1c954a5fb44efa5" width="40px">
+										<p></p>
+									</span>
+									<span ></span>
+									<span style="width: 50px;"></span>
+
+								</div>
+								
+								<div class="box1_info_one">
+									<span style="width: 60px;text-align: center;"></span>
+									<span>
+										<img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fae01.alicdn.com%2Fkf%2FHd605aa433ea94c7c8bf3d01968f01622b.jpg&refer=http%3A%2F%2Fae01.alicdn.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620323301&t=895b5bb00e0043a1f1c954a5fb44efa5" width="40px">
+										<p></p>
+									</span>
+									<span ></span>
+									<span style="width: 50px;"></span>
+								
+								</div>
+								
+								<div class="box1_info_one">
+									<span style="width: 60px;text-align: center;"></span>
+									<span>
+										<img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fae01.alicdn.com%2Fkf%2FHd605aa433ea94c7c8bf3d01968f01622b.jpg&refer=http%3A%2F%2Fae01.alicdn.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620323301&t=895b5bb00e0043a1f1c954a5fb44efa5" width="40px">
+										<p></p>
+									</span>
+									<span ></span>
+									<span style="width: 50px;"></span>
+								
+								</div>
+								
+								<div class="box1_info_one">
+									<span style="width: 60px;text-align: center;"></span>
+									<span>
+										<img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fae01.alicdn.com%2Fkf%2FHd605aa433ea94c7c8bf3d01968f01622b.jpg&refer=http%3A%2F%2Fae01.alicdn.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620323301&t=895b5bb00e0043a1f1c954a5fb44efa5" width="40px">
+										<p></p>
+									</span>
+									<span ></span>
+									<span style="width: 50px;"></span>
+								
+								</div>
+								
+								<div class="box1_info_one">
+									<span style="width: 60px;text-align: center;"></span>
+									<span>
+										<img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fae01.alicdn.com%2Fkf%2FHd605aa433ea94c7c8bf3d01968f01622b.jpg&refer=http%3A%2F%2Fae01.alicdn.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1620323301&t=895b5bb00e0043a1f1c954a5fb44efa5" width="40px">
+										<p></p>
+									</span>
+									<span ></span>
+									<span style="width: 50px;"></span>
+								
+								</div>
+							</div>
+						</div>
+					</div>
+					
+
+					
+					<div class="assess_nav">
+						<span>今日综合帖子测评</span>
+					</div>
+					
+					<div class="active_box2" style="height: 934px;">
+						<div class="box2_img1">
+							<div class="nav">
+								<span>言论检测</span>
+							</div>
+							<div class="shape" id="sex">
+								
+							</div>
+						</div>
+						
+						<div class="box2_img1" style="float: right;">
+							<div class="nav">
+								<span>文章分类</span>
+							</div>
+							<div class="shape" id="art_type">
+								
+							</div>
+						</div>
+					
+						<div class="img3" >
+							<div class="board">
+								<span>今日热词</span>
+							</div>
+							<div id="ssss" style="width: 670px;height: 400px;"></div>
+						</div>
+					</div>
+					
+					<div class="box3">
+						<div class="box3_nav">
+							<span>活<br>跃<br>用<br>户</span>
+						</div>
+						<div class="active_user_board">
+							<div style="height: 125px;width: 100%;border-bottom: rgba(0,0,0,0.2) solid 1px;">
+								<div style="padding: 20px;">
+									<img src="https://tvax2.sinaimg.cn/crop.0.0.1080.1080.1024/005IXu93ly8goyx3nq0u9j30u00u0dkt.jpg?KID=imgbed,tva&Expires=1617431539&ssig=m8%2B%2BUUrw%2Fy">
+									<span style="line-height: 80px;margin-left: 20px;font-size: 30px;color: #ff6700;">Post_Lee</span>								
+								</div>
+							</div>
+							<div class="active_user_bottom">
+							      <span style="margin-left: 10px;"> 发帖量:</span>
+								  <span> 50</span>
+								  <span>态度:</span>
+								  <span style="color: red;">消极</span>
+							</div>
+						</div>
+					</div>
+					
+					<div class="map">
+						<div class="map_nav">
+							<span>活跃地区分布</span>
+						</div>
+						<div class="map_map" id="map">
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div style="clear: both;"></div>
+		
+		<div style="margin-top: 90px;border-top: rgba(0,0,0,0.2) solid 1px;background-color: darkgray;">
+			<div style="margin: 0 auto;height: 30px;width: 200px;padding-top: 10px;">
+				<span style="color: white;text-align: center;">Copyright © 2021 AHPU </span>
+			</div>
+			
+		</div>
+		
+		<script>
+							
+			function active(post_array)
+			{
+				var myChart = echarts.init(document.getElementById('board_active'));
+				 option = {
+				     xAxis: {
+				         type: 'category',
+				         boundaryGap: false
+				     },
+				     yAxis: {
+				         type: 'value',
+				         boundaryGap: ['0%', '10%']
+				     },
+				     visualMap: {
+				         type: 'piecewise',
+				         show: false,
+				         dimension: 0,
+				         seriesIndex: 0,
+				     },
+					 grid: {  
+					      left: '2%',  
+					      right: '5%',  
+					      bottom: '0', 
+						  top:'5%',
+					     containLabel: true  
+					 } ,
+					 
+				     series: [
+				         {
+				             type: 'line',
+				             smooth: 0.6,
+				             symbol: 'none',
+				             lineStyle: {
+				                 color: '#5470C6',
+				                 width: 2
+				             },
+				             markLine: {
+				                 symbol: ['none', 'none'],
+				                 label: {show: false},
+				                 data: [
+				                     {xAxis: 1},
+				                     {xAxis: 3},
+				                     {xAxis: 5},
+				                     {xAxis: 7}
+				                 ]
+				             },
+				             areaStyle: {
+								 color: 'rgba(30,144,255,0.6)',
+							 },
+				             data: post_array,
+				         }
+				     ]
+				};
+				myChart.setOption(option);
+			}
+	
+							
+							function sex(data)
+							 {
+							 var myChart = echarts.init(document.getElementById('sex'));			
+							 // 指定图表的配置项和数据
+							 option = {
+							     tooltip: {
+							         trigger: 'item'
+							     },
+								 color: ['#5470c6','#91cc75'],
+								 legend: {
+								      top: '1%',
+								      left: 'center',
+								  },
+								  
+		
+								 
+							     series: [
+							         {
+							             name: '言论检测',
+							             type: 'pie',
+							             radius: ['40%', '60%'],
+							             avoidLabelOverlap: false,
+										 
+		                   label:{            //饼图图形上的文本颜色设置
+		                           normal:{
+		                               show:true,
+		                               position:'inner', //标签的位置
+		                               textStyle : {
+		                                   fontWeight : 200 ,
+		                                   fontSize : 20    //文字的字体大小
+		                               },
+		                               formatter:'{d}%'  //设置百分比
+		
+		                  
+		                           }
+		                       },
+							             emphasis: {
+							                 label: {
+							                     show: true,
+							                     fontSize: '40',
+							                     fontWeight: 'bold'
+							                 }
+							             },
+							             labelLine: {
+							                 show: true
+							             },
+							             data: [
+											 {value: data[0], name: '消极'},
+							                 {value: data[1], name: '积极'},
+											 
+							 
+							             ]
+							         }
+							     ]
+							 };
+							 				
+							 // 使用刚指定的配置项和数据显示图表。
+							 myChart.setOption(option);
+							}
+							
+							
+							function art_type()
+							 {
+							 var myChart = echarts.init(document.getElementById('art_type'));			
+							 // 指定图表的配置项和数据
+							 option = {
+								 color: ['#5470c6','#9a60b4','#91cc75','#fac858','#ee6666','#43c0de','#3ba272','#fc8452','#ea7ccc'],
+							     tooltip: {
+							         trigger: 'item',
+							         formatter: '{a} <br/>{b} : {c} ({d}%)'
+							     },
+							     legend: {
+							         orient: 'vertical',
+							         left: 'left',
+							         data: ['历史', '学术', '体育', '政治', '娱乐']
+							     },
+							     series: [
+							         {
+							             type: 'pie',
+							             radius: '55%',
+							             center: ['50%', '60%'],
+							             data: [
+							                 {value: 335, name: '历史'},
+							                 {value: 310, name: '学术'},
+							                 {value: 234, name: '体育'},
+							                 {value: 135, name: '政治'},
+							                 {value: 1548, name: '娱乐'}
+							             ],
+							             emphasis: {
+							                 itemStyle: {
+							                     shadowBlur: 10,
+							                     shadowOffsetX: 0,
+							                     shadowColor: 'rgba(0, 0, 0, 0.5)'
+							                 }
+							             }
+							         }
+							     ]
+							 };
+		
+							 				
+							 // 使用刚指定的配置项和数据显示图表。
+							 myChart.setOption(option);
+							}
+							
+							art_type()
+							
+							function ssss(word_data)
+							 {
+								  var canvas = document.getElementById('ssss');
+								  var options = eval({
+								          "list": word_data,//或者[['各位观众',45],['词云', 21],['来啦!!!',13]],只要格式满足这样都可以
+								          "gridSize": 6, // 密集程度 数字越小越密集
+								          "weightFactor": 1, // 字体大小=原始大小*weightFactor
+								          "maxFontSize": 130, //最大字号
+								          "minFontSize": 14, //最小字号
+								          "fontWeight": 'normal', //字体粗细
+								          "fontFamily": 'Times, serif', // 字体
+								          "color": 'random-light', // 字体颜色 'random-dark' 或者 'random-light'
+								          "rotateRatio": 1 // 字体倾斜(旋转)概率，1代表总是倾斜(旋转)
+								      });
+								  //生成
+								  WordCloud(canvas, options);
+							}
+		
+		function map(data,max_num)
+		{	
+			var dataList=[
+			    {name:"南海诸岛",value:data['南沙诸岛']},
+			    {name: '北京', value:data['北京']},
+			    {name: '天津', value:data['天津']},
+			    {name: '上海', value:data['上海']},
+			    {name: '重庆', value:data['重庆']},
+			    {name: '河北', value:data['河北']},
+			    {name: '河南', value:data['河南']},
+			    {name: '云南', value:data['云南']},
+			    {name: '辽宁',value:data['辽宁']},
+			    {name: '黑龙江',value:data['黑龙江']},
+			    {name: '湖南', value:data['湖南']},
+			    {name: '安徽', value:data['安徽']},
+			    {name: '山东', value:data['山东']},
+			    {name: '新疆', value:data['新疆']},
+			    {name: '江苏', value:data['江苏']},
+			    {name: '浙江', value:data['浙江']},
+			    {name: '江西', value:data['江西']},
+			    {name: '湖北', value:data['湖北']},
+			    {name: '广西', value:data['广西']},
+			    {name: '甘肃', value:data['甘肃']},
+			    {name: '山西', value:data['山西']},
+			    {name: '内蒙古', value:data['内蒙古']},
+			    {name: '陕西', value:data['陕西']},
+			    {name: '吉林', value:data['吉林']},
+			    {name: '福建', value:data['福建']},
+			    {name: '贵州', value:data['贵州']},
+			    {name: '广东', value:data['广东']},
+			    {name: '青海', value:data['青海']},
+			    {name: '西藏', value:data['西藏']},
+			    {name: '四川', value:data['四川']},
+			    {name: '宁夏', value:data['宁夏']},
+			    {name: '海南', value:data['海南']},
+			    {name: '台湾',value:data['台湾']},
+			    {name: '香港',value:data['香港']},
+			    {name: '澳门',value:data['澳门']}
+			]
+			var myChart = echarts.init(document.getElementById('map'));
+			option = {
+			    tooltip: {
+			            formatter:function(params,ticket, callback){
+			                return params.seriesName+'<br />'+params.name+'：'+params.value
+			            }//数据格式化
+			        },
+			    visualMap: {
+			        min: 0,
+			        max: max_num,
+			        left: 'left',
+			        top: 'bottom',
+			        text: ['高','低'],//取值范围的文字
+			        inRange: {
+			            color: ['white', '#ee6666']//取值范围的颜色
+			        },
+			        show:true//图注
+			    },
+			    geo: {
+			        map: 'china',
+			        roam: false,//不开启缩放和平移
+			        zoom:1.23,//视角缩放比例
+			        label: {
+			            normal: {
+			                show: true,
+			                fontSize:'12',
+			                color: 'rgba(0,0,0,0.7)'
+			            }
+			        },
+			        itemStyle: {
+			            normal:{
+			                borderColor: 'rgba(0,0,0,0.2)'
+			            },
+			            emphasis:{
+			                areaColor: 'rgba(0, 0, 0, 0.1)',//鼠标选择区域颜色
+			                shadowOffsetX: 0,
+			                shadowOffsetY: 0,
+			                shadowBlur: 20,
+			                borderWidth: 0,
+			                shadowColor: 'rgba(0, 0, 0, 0.5)'
+			            }
+			        }
+			    },
+			    series : [
+					{
+					    name: '发帖量',
+					    type: 'map',
+					    geoIndex: 0,
+						data:dataList,
+						
+					},
+							
+					
+			    ]
+			};
+			myChart.setOption(option);
+			
+			}
+						
+					
+		
+		</script>
+	</body>
+	
+	<script>
+		function checkcookie()
+		{
+						 this.setCookie = function(c_name,value,expiredays)
+						 {
+							   var exdate=new Date();
+							   exdate.setDate(exdate.getDate()+expiredays);
+							   document.cookie=c_name+ "=" +escape(value)+
+							   ((expiredays==null) ? "" : ";expires="+exdate.toGMTString()) + ";path=/"
+						 }
+		
+						 this.getCookie = function(userName)
+		    {
+		       if (document.cookie.length>0){
+		            c_start=document.cookie.indexOf(userName+ "=");
+		           if (c_start!=-1){
+		               c_start=c_start + userName.length+1;
+		               c_end=document.cookie.indexOf(";",c_start);
+		           if (c_end==-1){
+		                c_end=document.cookie.length;
+		           }
+		           return unescape(document.cookie.substring(c_start,c_end));
+		           }
+		       }
+		       return "";
+		   }
+		
+						this.check = function()
+						{
+						    userName = cookie_.getCookie('userName');
+							if(userName)
+							{
+							    $.ajax({
+							     url:"/check_statu/",
+							     type:"get",
+							     dataType:"json",
+							     data:{"cookie":userName},
+							     success:function (data) {
+									 if(data.statu){
+										 update_data(data.user_id)
+										 $("#user_name").text(data.user_name)
+									 }
+									 else{
+										 alert("身份认证已失效，请重新登录")
+										 location.href="/sign/"
+									 }
+								}
+							    })
+							}
+							else
+							{
+								alert("身份认证已失效，请重新登录")
+								location.href="/sign/"
+							}
+						}
+		}
+		var cookie_=new checkcookie()
+		cookie_.check()
+		
+		
+		// 作图使用
+		function update_data(user_id){
+			$.ajax({
+			     url:"/get_home_data/",
+			     type:"get",
+			     dataType:"json",
+			     data:{"user_id":user_id},
+			     success:function (data) {
+					 $(".number_2 span").eq(0).text(data.post_num)
+					 $(".number_2 span").eq(1).text(data.read_num)
+					 $(".number_2 span").eq(2).text(data.follo_num)
+					 $(".number_2 span").eq(3).text(data.comment_num)
+					 $(".number_2 span").eq(4).text((data.grade).toFixed(2))
+					 $(".number_2 span").eq(5).text(data.ch_num)
+					 
+					 for(var i=0;i<data.rank.length;i++)
+					 {
+						$(".box1_info_one img").eq(i).attr('src',data.rank[i][4]);
+						$(".box1_info_one p").eq(i).text(data.rank[i][3]);
+						$(".box1_info_one span").eq(i*4+2).text(data.rank[i][1]);
+						$(".box1_info_one span").eq(i*4+3).text(data.rank[i][2]);
+						$(".box1_info_one span").eq(i*4).text(i+1)
+					 }
+					 
+					 sex([([1-data.grade]*100).toFixed(2),(data.grade*100).toFixed(2)])
+					 map(data.area,dict_getmax(data.area))
+					 ssss(word_could(data.hot_words))
+					 active(data.post_analy)
+					 
+					 $(".active_user_board span").eq(0).text(data.active_user[2]);
+					 $(".active_user_board span").eq(2).text(data.active_user[1]);
+					 $(".active_user_board span").eq(4).text(judeg_grade(data.active_user[4]));
+					 $(".active_user_board img").attr('src',data.active_user[3])
+					 }			
+			    })
+		}
+		
+		
+	</script>
+	
+	<script>
+		function judeg_grade(number)
+		{
+			if(number < 0.2){
+				return '消极'
+			}
+			
+			else if( number <0.8){
+				$(".active_user_board span").eq(4).css("color","#fc8452");
+				return '中性'
+			}
+			else{
+				$(".active_user_board span").eq(4).css("color","#91cc75");
+				return '积极'
+			}
+		}
+		
+		//取字典最大值
+		function dict_getmax(dict){
+			for (var i in dict){
+				return dict[i]
+			}
+		}
+		
+		function word_could(array)
+		{
+			max = array[0][1]
+			size = 130/max
+			
+			for(var i=0;i<array.length;i++)
+			{
+				array[i][1]=array[i][1]*size
+			}
+			return array
+		}
+	</script>
+</html>

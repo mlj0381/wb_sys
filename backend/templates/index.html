@@ -1,0 +1,297 @@
+<!DOCTYPE >
+<html>
+	<head>
+
+		<meta charset="utf-8" />
+		<script src="/templates/js/jquery.js"></script>
+	</head>
+	<body>
+		<style>
+			 
+			body{
+				background-image: url(/templates/images/2.png);
+				background-size: cover;
+				image-rendering: -webkit-optimize-contrast;
+				font-family: 'Microsoft Yahei';
+			}
+			ul{
+				list-style-type: none;
+			}
+			.board{
+				width: 400px;
+				height: 550px;
+				background-color: rgba(248,248,255,0.9);
+				border-radius: 10px 10px 10px 10px;
+				margin-top: 10%;
+				margin-left: 70%;
+				transition: all 1s;
+				overflow: hidden;
+			}
+			.board:hover{
+				margin-top: 9.5%;
+			}
+			
+			.nav{
+				width: 100%;
+				height: 150px;
+			}
+			.nav span{
+				float: left;
+				width: 100%;
+				margin-top: 30px;
+				display: block;
+				line-height: 100px;
+				text-align: center;
+				font-size: 39px;
+
+			}
+			.input100
+			{
+				border: none;
+				outline: none;
+				text-transform: none;
+				overflow: visible;
+				background: transparent;
+				line-height: 40px;
+				font-size: 20px;
+				margin-bottom: 5px;
+				width: 310px;
+			}
+			
+			.bottom{
+				height: 2px;
+				background-color: rgba(0,0,0,0.3);
+				width: 100%;
+				transition: all 2s;
+				position: relative;
+				overflow: hidden;
+				
+			}
+			
+			.bottom_hover{
+				height: 2px;
+				background-color: rgba(0,0,0,0.4);
+				width: 100%;
+				margin-left: -370px;
+			}
+			
+			.text{
+				padding: 20px;
+				padding-top: 0;
+				margin-bottom: 20px;
+				
+			}
+			
+			.text span{
+				display: block;
+				margin-bottom: 10px;
+			}
+			.text img{
+				margin-top: 5px;
+				float: left;
+				margin-top: 10px;
+				margin-right: 20px
+			}
+			
+			.hover{
+				background-color: rgba(0,0,0,0.9);
+			}
+			
+			.sign{
+				background-color: rgba(	30,144,255,0.9);
+				width: 90%;
+				line-height: 50px;
+				margin-left: 5%;
+				text-align: center;
+				border-radius: 10px 10px 10px 10px;
+				color: white;
+				cursor: pointer;
+				transition: all 2s;
+			}
+			
+			.sign:hover{
+				background-color: rgba(65,105,225,1);
+			}
+			
+
+
+		</style>
+		<div class="board">
+			<div style="width: 820px;float: left;" id="board_main">
+		   	    <div style="float: left;width: 400px;">
+		   	        <div class="nav">
+		   		        <span>登录</span>
+		   	        </div>
+		   	        <div class="text">
+			   	        <span>用户名</span>
+			   	        <img src="/templates/images/user3.png" width="23px" style="opacity: 0.8;">
+			   	        <input class="input100" type="text" name="username" placeholder="请输入用户名" autocomplete="off">
+				           <div class="bottom">
+				   	        <div class="bottom_hover"  id="bottom1"></div>
+				               </div>
+				
+				           <span style="margin-top: 20px;">密码</span>
+				           <img src="/templates/images/passwd3.png" width="23px">
+				           <input class="input100" type="password" name="password" placeholder="请输入密码" autocomplete="off">
+				           <div class="bottom">
+					               <div class="bottom_hover"  id="bottom2"></div>
+				               </div>
+			        </div>
+			
+			        <div class="sign" id="user_sign">
+				        <span>登    录</span>
+			        </div>
+			        <div class="sign" style="margin-top: 23px;" id="regest">
+				        <span>注    册</span>
+			        </div>
+			    </div>
+			
+			
+			    <div style="float: left;width: 400px;">
+			        <div class="nav" >
+				        <span>注册</span>
+			        </div>
+			        <div class="text">
+				        <span>用户名</span>
+				        <img src="/templates/images/user3.png" width="23px">
+				        <input class="input100" type="text" name="resign_username" placeholder="请输入用户名" autocomplete="off">
+				        <div class="bottom"></div>
+				
+				        <span style="margin-top: 20px;">密码</span>
+				        <img src="/templates/images/passwd3.png" width="23px">
+				        <input class="input100" type="password" name="resign_password" placeholder="请输入密码" autocomplete="off">
+				        <div class="bottom"></div>
+				
+				        <span style="margin-top: 20px;">核实密码</span>
+				        <img src="/templates/images/passwd3.png" width="23px">
+				        <input class="input100" type="password" name="resign_password_again" placeholder="请再次输入密码" autocomplete="off">
+				        <div class="bottom"></div>
+			        </div>
+			
+			        <div class="sign" id="sign">
+				        <span>
+					        返回登录
+				        </span>
+			        </div>
+			        <div class="sign" style="margin-top: 23px;">
+				        <span>
+					        注    册
+				        </span>
+			        </div>
+			    </div>
+			
+			</div>
+			
+
+		</div>
+		<script>
+			$("input[name='username']").mouseenter(
+			  function(){
+			    $("#bottom1").stop(true,true).animate({marginLeft:0},500)
+			  }
+			).mouseleave(
+			  function(){
+				  $("#bottom1").stop(true,true).animate({marginLeft:-370},500)
+			  })
+			  
+			  $("input[name='password']").mouseenter(
+			    function(){
+			      $("#bottom2").stop(true,true).animate({marginLeft:0},500)
+			    }
+			  ).mouseleave(
+			    function(){
+			  	  $("#bottom2").stop(true,true).animate({marginLeft:-370},500)
+			    })
+				
+			$("#regest").click(
+			function()
+			{
+			    $("#board_main").stop(true,true).animate({marginLeft:-398},500)
+				$(".board").height(640)
+			}
+			)
+			
+			$("#sign").click(
+			function()
+			{
+			    $("#board_main").stop(true,true).animate({marginLeft:0},500)
+				$(".board").height(550)
+			}
+			)	
+		</script>
+		
+		<script>
+			//构造获取cookie函数
+			
+			 function checkcookie()
+			 {
+				 this.setCookie = function(c_name,value,expiredays)
+				 {
+					   var exdate=new Date();
+					   exdate.setDate(exdate.getDate()+expiredays);
+					   document.cookie=c_name+ "=" +escape(value)+
+					   ((expiredays==null) ? "" : ";expires=") + ";path=/"
+				 }
+			
+				 this.getCookie = function(userName)
+			     {
+			        if (document.cookie.length>0){
+			             c_start=document.cookie.indexOf(userName+ "=");
+			            if (c_start!=-1){
+			                c_start=c_start + userName.length+1;
+			                c_end=document.cookie.indexOf(";",c_start);
+			            if (c_end==-1){
+			                 c_end=document.cookie.length;
+			            }
+			            return unescape(document.cookie.substring(c_start,c_end));
+			            }
+			        }
+			        return "";
+			    }
+			
+				this.check = function()
+				{
+					var  userName = cookie_.getCookie('userName');
+					if(userName)
+					{
+					    return(userName)
+					}
+					else
+					{
+						//如果本地没有存储cookie,随机cookie
+						var number = Math.floor(Math.random()*10000000000000000)
+						cookie_.setCookie('userName',number,1);
+						userName = cookie_.getCookie('userName');
+						return(userName)
+					}
+				}
+			 }
+			
+			document.getElementById("user_sign").onclick = function()
+			{
+				cookie_= new checkcookie()
+				var s=cookie_.check()
+				 //判断登录成功与否
+			     $.ajax({
+			      url:"/sign_check/",
+			      type:"get",
+			      dataType:"json",
+			      data:{"account":$("[name='username']").val(),"passwd":$("[name='password']").val(),"cookie":s},
+			      success:function (data) {
+					  if(data.res == 1)
+					  {
+						  alert("登录成功")
+						  location.href="/table/"
+					  }
+					  else
+					  {
+						  alert("账号或密码错误")
+					  }
+			     }
+			     })
+			}
+			
+		</script>
+		
+	</body>
+</html>

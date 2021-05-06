@@ -1,0 +1,995 @@
+<!DOCTYPE >
+<html>
+	
+	<head>
+		<meta charset="utf-8">
+		<script src="../templates/js/jquery.js"></script>
+		<script src="../templates/js/echarts.js"></script>
+		<script src="../templates/js/worldcloud.js"></script>
+		<script src="../templates/js/china.js"></script>
+		<script src="../templates/js/wordcloud2.js"></script>
+	</head>
+	
+	<style>
+		/*公共属性*/
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		a{text-decoration: none;color: black}
+		
+		ul,li{float: left;list-style-type: none;transition: all 0.5s;}
+		
+		div::-webkit-scrollbar{
+		  width:5px;
+		  height:0px;
+		}
+		
+		div::-webkit-scrollbar-thumb{
+		  background: gray;
+		  border-radius:10px;
+		}
+		
+		
+		.head_nav {
+			border-bottom: rgba(0,0,0,0.1) solid 1px;
+		}
+		
+		.head_nav .content{
+			width: 1426px;
+			margin: 0 auto;
+			padding-top: 20px;
+			
+		}
+		
+		.head_nav .content .content_img{
+			float: left;
+		}
+		
+		.head_nav .content .content_img img,span{
+			float: left;
+		}
+		
+		.head_nav .content .content_img span{
+			display: block;
+			padding-top: 17px;
+			margin-left: 15px;
+			font-size: 27px;
+			font-weight: bold;
+			padding-bottom: 25px;
+		}
+		
+		.head_nav .content .content_person{
+			float: right;
+		}
+		
+		.head_nav .content .content_person .search_box{
+			border: royalblue solid 1px;
+			border-radius: 5px 5px 5px 5px;
+			margin-top: 15px;
+			padding: 10px;
+			color: royalblue;
+			cursor: pointer;
+			float: left;
+			margin-right: 30px;
+		}
+		
+		.head_nav .content .content_person img{
+			float: left;
+		}
+		
+		
+		.person_info{
+			float: left;
+			margin-top: 13px;
+			margin-left: 30px;
+		}
+		
+		.person_info img{
+			
+			
+			width: 45px;
+			border-radius: 50%;
+		}
+		
+		.person_info .user_name
+		{
+			float: left;
+			margin-left: 20px;
+		}
+		
+		.select_board{
+			width: 1426px;
+			margin: 0 auto;
+		}
+		
+		.select_board ul{
+			float: left;
+		}
+		
+		.select_board li{
+			width: 100px;
+			margin-left: 30px;
+			line-height: 65px;
+			text-align: center;
+			color: rgba(0,0,0,0.7);
+			font-weight: 500;
+			cursor: pointer;
+		}
+		
+		.select_board .hover{
+			border-bottom: rgba(0,0,0,0.2) solid 2px;
+			color: royalblue;
+		}
+		
+		.search_fun{
+			float: right;
+			width: 290px;
+			height: 40px;
+			margin-top: 13px;
+			border: rgba(0,0,0,0.1) solid 1px;
+			border-radius: 2px 2px 2px 2px;
+		}
+		
+		.select_ul{
+			float: left;
+		}
+		
+		.input100
+		{
+			border: none;
+			outline: none;
+			text-transform: none;
+			overflow: visible;
+			background: transparent;
+			line-height: 40px;
+			font-size: 17px;
+			margin-bottom: 5px;
+			margin-left: 5px;
+			float: left;
+			color: rgba(0,0,0,0.6);
+		    width: 250px;
+		}
+		
+		.search_fun img{
+			
+			margin-top: 10px;
+			cursor: pointer;
+			width: 20px;
+			margin-left: 5px;
+		}
+		
+		.active_board{
+			
+		}
+		
+		.active_board_main{
+			width: 1426px;
+			margin: 0 auto;
+			padding-top: 20px;
+			margin-bottom: 30px;
+			
+		}
+		.active_board_select{
+			float: left;
+			width: 100%;
+			height: 80px;
+			box-shadow: 0 0.8px 2px 0 gray;
+			
+		}
+		
+		.active_board_select select{
+			  width: 130px;
+			  height: 28px;
+			  font-size: 15px;
+		}
+		
+		.active_board_select ul{
+			margin-right: 20px;
+			cursor: pointer;
+		}
+		
+		.active_board_select li{
+			width: 85px;
+			line-height: 45px;
+			text-align: center;
+			border: rgba(0,0,0,0.3) solid 1px;
+		}
+		
+		.active_board_select .hover{
+			background-color: cornflowerblue;
+			color: white;
+		}
+		
+	</style>
+	
+	<body>
+		<div class="head_nav">
+			<div class="content">
+				<div class="content_img">
+					<img src="../templates/images/head2.png"  width="60px"/>
+					<span>
+						微博超话舆情分析系统
+					</span>
+				</div>
+				
+				<div class="content_person">
+					<div class="search_box">
+						<span>&nbsp;&nbsp;我的账户&nbsp;&nbsp;</span>
+					</div>
+					
+					<img src="../templates/images/news.png" width="30px" style="margin-top: 20px;" />
+					
+					<div class="person_info">
+						<img src="../templates/images/head_img.jpg">
+						<div class="user_name">
+							<span style="font-weight: bold;display: block;" id="user_name">BanksY ol</span>
+							<br>
+							<span style="color: rgba(0,0,0,0.7);margin-top: 3px;">AHPU</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div style="clear: both;"></div>
+		</div>
+		
+		
+		<div class="head_nav">
+			<div class="select_board">
+				<div class="select_ul">
+				   <ul>
+					   <a href="/table/"><li style="margin-left: 0;">首页</li></a>
+					   <a href="/hotspot/"><li>舆情关注热点</li></a>
+					   <a href="/view/"><li>信息概览</li></a>
+					   <a href="/analysis/"><li  class="hover">超话分析</li></a>
+					   <a href="/testing/"><li>异常言论检测</li></a>
+					   <a href="/task/"><li>任务管理</li>  </a>
+					   <a href="/myaccount/"><li>我的账户</li></a>
+				   </ul>
+				</div>
+				
+				<div class="search_fun">
+					<input class="input100" type="text" name="resign_password_again" placeholder="Search...." autocomplete="off">
+					<img src="../templates/images/search.png">
+				</div>			
+			</div>
+			<div style="clear: both;"></div>
+		</div>
+		
+		<div class="active_board">
+			<div class="active_board_main">
+				<div class="active_board_select">
+					<div style="float: left; width: 300px;padding-top: 20px;font-size: 20px;padding-left: 20px;">
+						<span>选择超话：</span>
+						<select class="select_select">
+							<option >全部</option>
+						</select>
+					</div>
+					
+					<div style="float: right;padding-top: 10px;">
+						<ul class="data_select" >
+							<li class="hover">近一周</li>
+							<li>近一月</li>
+							<li>ALL</li>
+						</ul>
+					</div>
+				</div>
+								
+				<div style="width: 100%;float: left;">
+					
+					<div style="margin-top: 40px;float: left;width: 1426px;height: 600px;">
+						<div style="float: left;width: 42%;height: 600px;box-shadow: 0.5px 0.5px 2px  gray;">
+							<div style="float: left;width: 100%;border-bottom: rgba(0,0,0,0.2) solid 1px;">
+								<span style="line-height: 60px;padding-left: 20px;">概括</span>
+							</div>
+							<div style="float: left;width: 100%;height: 540px;position: relative;" class="map1">
+								
+								<div style="float: left;width: 100%;">
+									<span style="line-height: 120px;padding-left: 50px;font-size: 40px;"> 近一周</span>
+									<span style="line-height: 120px;font-size: 40px;"> 发帖  :</span>
+									<span style="line-height: 120px;font-size: 60px;margin-left: 30px;"> 5607</span>
+								</div>
+								
+								<div style="float: left;width: 100%;">
+									<span style="line-height: 50px;font-size: 32px;padding-left: 50px;"> 评论:</span>
+									<span style="line-height: 50px;font-size: 52px;margin-left: 30px;"> 5607</span>
+								</div>
+								
+								<div style="float: left;width: 100%;margin-top: 20px;">
+									<span style="line-height: 70px;font-size: 32px;padding-left: 50px;"> 超话环境:</span>
+									<span style="line-height: 70px;font-size: 52px;margin-left: 30px;"> 良</span>
+								</div>
+								<div style="float: left;width: 100%;height: 100%;margin-top: 20px;margin-left: 200px;position: absolute;top: 80;opacity: 0.8;left: -80;" id="sex">
+								
+									
+								</div>
+								
+								
+							</div>
+						</div>
+						
+						<div style="float: right;width: 45%;height: 600px;box-shadow: 0.5px 0.5px 2px  gray;">
+							<div style="float: left;width: 100%;border-bottom: rgba(0,0,0,0.2) solid 1px;">
+								<span style="line-height: 60px;padding-left: 20px;" >文章类型</span>
+							</div>
+							<div style="float: left;width: 100%;height: 540px;" id="type">
+							</div>
+						</div>
+					</div>
+					
+					<div style="margin-top: 40px;float: left;width: 1426px;height: 600px;">
+						<div style="float: left;width: 1426px;height: 600px;box-shadow: 0.5px 0.5px 2px  gray;">
+							<div style="float: left;width: 100%;border-bottom: rgba(0,0,0,0.2) solid 1px;">
+								<span style="line-height: 60px;padding-left: 20px;">用户活跃时间段</span>
+							</div>
+							<div style="float: left;width: 100%;height: 540px;" id="active">
+								
+							</div>
+						</div>
+						
+					</div>
+					
+					<div style="margin-top: 40px;float: left;width: 1426px;height: 600px">
+						<div style="float: left;width: 55%;height: 600px;box-shadow: 0.5px 0.5px 2px  gray;">
+							<div style="float: left;width: 100%;border-bottom: rgba(0,0,0,0.2) solid 1px;">
+								<span style="line-height: 60px;padding-left: 20px;">热词</span>
+							</div>
+							<div style="float: left;width: 100%;height: 540px;" id="map4">
+
+							</div>
+						</div>
+						
+						<div style="float: right;width: 40%;height: 600px;box-shadow: 0.5px 0.5px 2px  gray;">
+							<div style="float: left;width: 100%;border-bottom: rgba(0,0,0,0.2) solid 1px;">
+								<span style="line-height: 60px;padding-left: 20px;">男女比例</span>
+							</div>
+							<div style="float: left;width: 100%;height: 540px;" id="map5">
+							</div>
+						</div>
+					</div>
+					
+					<div style="margin-top: 40px;float: left;width: 1426px;height: 500px">
+						<div style="float: left;width: 75%;height: 500px;box-shadow: 0.5px 0.5px 2px  gray;">
+							<div style="float: left;width: 100%;border-bottom: rgba(0,0,0,0.2) solid 1px;">
+								<span style="line-height: 60px;padding-left: 20px;">用户年龄段分布</span>
+							</div>
+							<div style="float: left;width: 100%;height: 440px;" id="map6">
+					
+							</div>
+						</div>
+					</div>
+					
+					<div style="margin-top: 40px;float: left;width: 1426px;height: 800px;">
+						<div style="float: left;width: 100%;height: 800px;box-shadow: 0.5px 0.5px 2px  gray;">
+							<div style="float: left;width: 100%;;border-bottom: rgba(0,0,0,0.2) solid 1px;">
+								<span style="line-height: 60px;padding-left: 20px;">用户地区分布</span>
+							</div>
+							<div style="float: left;width: 100%;height: 740px;" id="map7">
+					
+							</div>
+						</div>
+					</div>
+					
+				</div>
+				
+				
+				<div style="clear: both;"></div>
+				
+			</div>	
+		</div>
+		
+		
+	</body>
+	<script>
+		function sex(grade)
+		{
+		var myChart = echarts.init(document.getElementById('sex'));			
+		// 指定图表的配置项和数据
+		option = {
+		    tooltip: {
+		        trigger: 'item'
+		    },
+			color: ['#ee6666','#91cc75'],
+			legend: {
+			     top: '1%',
+			     left: 'center',
+			 },									 
+		    series: [
+		        {
+		            name: '言论检测',
+		            type: 'pie',
+		            radius: ['40%', '60%'],
+		            avoidLabelOverlap: false,
+												 
+		    label:{            //饼图图形上的文本颜色设置
+		            normal:{
+		                show:true,
+		                position:'inner', //标签的位置
+		                textStyle : {
+		                    fontWeight : 200 ,
+		                    fontSize : 20    //文字的字体大小
+		                },
+		                formatter:'{d}%'  //设置百分比
+		    		
+		    		                  
+		            }
+		        },
+		        emphasis: {
+		                         label: {
+		                             show: true,
+		                             fontSize: '40',
+		                             fontWeight: 'bold'
+		                         }
+		                     },
+		                     labelLine: {
+		                         show: true
+		                     },
+		                     data: [
+		        				 {value: (1-grade).toFixed(3), name: '消极'},
+		                         {value: grade, name: '积极'},
+		        				 
+		         
+		                     ]
+		                 }
+		             ]
+		         };
+		         				
+		         // 使用刚指定的配置项和数据显示图表。
+		         myChart.setOption(option);
+		        }
+		     
+				
+				
+				function type()
+				{
+				        var myChart = echarts.init(document.getElementById('type'));
+				
+				        // 指定图表的配置项和数据
+				              option = {
+				        tooltip: {},
+				        legend: {
+				        data: ['预算分配（Allocated Budget）', '实际开销（Actual Spending）']
+				        },
+						color:'#43c0de',
+				        radar: {
+				        // shape: 'circle',
+				        name: {
+				        textStyle: {
+				        color: '#fff',
+				        backgroundColor: '#999',
+				        borderRadius: 5,
+				        padding: [3, 5]
+				        }
+				        },
+				    indicator: [
+				    { name: '历史', max: 500},
+				    { name: '军事', max: 400},
+				    { name: '体育', max: 300},
+				    { name: '学习', max: 200},
+				    { name: '科技', max: 100},
+				    { name: '娱乐', max: 200}
+				    ]
+				            },
+				    series: [{
+				    name: '类型',
+				    type: 'radar',
+				    areaStyle: {normal: {}},
+				    data: [
+				
+				    {
+				        value: [470,350,210,110,80,150],  //最大值
+				    }
+				      ]
+				    }] 
+				   };
+						
+				   myChart.setOption(option);
+				}
+				type()
+				
+				function active(x,y)
+				{
+					var myChart = echarts.init(document.getElementById('active'));
+				    option = {
+				       title: {
+				       text: '用户活跃时段',
+				       },
+				     tooltip: {
+				     trigger: 'axis'
+				     },
+				     toolbox: {
+				     show: true,
+				     feature: {
+				     dataZoom: {
+				        yAxisIndex: 'none'
+				    },
+				    dataView: {readOnly: false},
+				    magicType: {type: ['line', 'bar']},
+				    }
+				    },
+				    xAxis: {
+				    type: 'category',
+				    boundaryGap: false,
+				    data: x	,
+					},
+				    yAxis: {
+				    type: 'value',
+				    axisLabel: {
+				        formatter: '{value} '
+				    }
+				    },
+				    series: [
+						
+				    {
+				
+				    type: 'line',
+				    data: y,
+				    markPoint: {
+				        data: [
+				            {type: 'max', name: '最大值'},
+							{type: 'min', name: '最小值'}
+				        ]
+				    },
+					itemStyle: {
+					             normal: {
+					                 color: 'red',
+	
+					              }
+					           },
+							   
+				    markLine: {
+				        data: [
+				            {type: 'average', name: '平均日发帖量'}
+				        ]
+				    }},]};	
+					 myChart.setOption(option);
+				 }
+				 
+				 function hot_words(word_data)
+				  {
+				 	  var canvas = document.getElementById('map4');
+				 	  var options = eval({
+				 	          "list": word_data,//或者[['各位观众',45],['词云', 21],['来啦!!!',13]],只要格式满足这样都可以
+				 	          "gridSize": 6, // 密集程度 数字越小越密集
+				 	          "weightFactor": 1, // 字体大小=原始大小*weightFactor
+				 	          "maxFontSize": 130, //最大字号
+				 	          "minFontSize": 14, //最小字号
+				 	          "fontWeight": 'normal', //字体粗细
+				 	          "fontFamily": 'Times, serif', // 字体
+				 	          "color": 'random-light', // 字体颜色 'random-dark' 或者 'random-light'
+				 	          "rotateRatio": 1 // 字体倾斜(旋转)概率，1代表总是倾斜(旋转)
+				 	      });
+				 	  //生成
+				 	  WordCloud(canvas, options);
+				 }
+				 
+				 function sex_radio(array)
+				 {
+				    var myChart = echarts.init(document.getElementById('map5'));
+				    // 指定图表的配置项和数据
+				    option = {
+				        tooltip: {
+				            trigger: 'item'
+				       },
+				     color: ['#43c0de','#ee6666'],
+				   	 legend: {
+				   	      top: '1%',
+				   	      left: 'center',
+				   	  },
+				   	  
+  
+				   	 
+				     series: [
+				     {
+				      name: '男女比例',
+				      type: 'pie',
+
+				      avoidLabelOverlap: false,
+				   			 
+				      label:{            //饼图图形上的文本颜色设置
+				      normal:{
+				          show:true,
+				          position:'inner', //标签的位置
+				          textStyle : {
+				              fontWeight : 200 ,
+				              fontSize : 20    //文字的字体大小
+				          },
+				          formatter:'{d}%'  //设置百分比
+				    		
+				    		                  
+				            }
+				        },
+				    	 emphasis: {
+				    		label: {
+				    		show: true,
+				    		fontSize: '40',
+				    		fontWeight: 'bold'
+				    		}
+				    	},
+				    	labelLine: {
+				    	    show: true
+				    	},
+						radius: ['40%', '70%'],
+						            avoidLabelOverlap: false,
+						            itemStyle: {
+						                borderRadius: 10,
+						                borderColor: '#fff',
+						                borderWidth: 10
+						            },
+				    	data: [
+				            {value:array[0], name: '男'},
+				    	    {value:array[1], name: '女'},
+				    			 ]
+				            }
+			            ]
+                     };
+				    							 				
+				     // 使用刚指定的配置项和数据显示图表。
+				    myChart.setOption(option);
+				}
+				
+				function age_dis(post_array)
+				{
+					var myChart = echarts.init(document.getElementById('map6'));
+					 option = {
+					     xAxis: {
+					         type: 'category',
+					         boundaryGap: false
+					     },
+					     yAxis: {
+					         type: 'value',
+					         boundaryGap: [0,'10%']
+					     },
+					     visualMap: {
+					         type: 'piecewise',
+					         show: false,
+					         dimension: 0,
+					         seriesIndex: 0,
+					     },
+						 grid: {  
+						      left: '2%',  
+						      right: '5%',  
+						      bottom: '0', 
+							  top:'5%',
+						     containLabel: true  
+						 } ,
+						 
+					     series: [
+					         {
+					             type: 'line',
+					             smooth: 0.6,
+					             symbol: 'none',
+					             lineStyle: {
+					                 color: '#5470C6',
+					                 width: 3
+					             },
+					             markLine: {
+					                 symbol: ['none', 'none'],
+					                 label: {show: false},
+					                 data: [
+					                     {xAxis: 1},
+					                     {xAxis: 3},
+					                     {xAxis: 5},
+					                     {xAxis: 7}
+					                 ]
+					             },
+					             areaStyle: {
+									
+								 },
+					             data: post_array,
+					         }
+					     ]
+					};
+					myChart.setOption(option);
+				}
+				
+	function map(data,max_num)
+	{	
+		var dataList=[
+		    {name:"南海诸岛",value:data['南沙诸岛']},
+		    {name: '北京', value:data['北京']},
+		    {name: '天津', value:data['天津']},
+		    {name: '上海', value:data['上海']},
+		    {name: '重庆', value:data['重庆']},
+		    {name: '河北', value:data['河北']},
+		    {name: '河南', value:data['河南']},
+		    {name: '云南', value:data['云南']},
+		    {name: '辽宁',value:data['辽宁']},
+		    {name: '黑龙江',value:data['黑龙江']},
+		    {name: '湖南', value:data['湖南']},
+		    {name: '安徽', value:data['安徽']},
+		    {name: '山东', value:data['山东']},
+		    {name: '新疆', value:data['新疆']},
+		    {name: '江苏', value:data['江苏']},
+		    {name: '浙江', value:data['浙江']},
+		    {name: '江西', value:data['江西']},
+		    {name: '湖北', value:data['湖北']},
+		    {name: '广西', value:data['广西']},
+		    {name: '甘肃', value:data['甘肃']},
+		    {name: '山西', value:data['山西']},
+		    {name: '内蒙古', value:data['内蒙古']},
+		    {name: '陕西', value:data['陕西']},
+		    {name: '吉林', value:data['吉林']},
+		    {name: '福建', value:data['福建']},
+		    {name: '贵州', value:data['贵州']},
+		    {name: '广东', value:data['广东']},
+		    {name: '青海', value:data['青海']},
+		    {name: '西藏', value:data['西藏']},
+		    {name: '四川', value:data['四川']},
+		    {name: '宁夏', value:data['宁夏']},
+		    {name: '海南', value:data['海南']},
+		    {name: '台湾',value:data['台湾']},
+		    {name: '香港',value:data['香港']},
+		    {name: '澳门',value:data['澳门']}
+		]
+		var myChart = echarts.init(document.getElementById('map7'));
+		option = {
+		    tooltip: {
+		            formatter:function(params,ticket, callback){
+		                return params.seriesName+'<br />'+params.name+'：'+params.value
+		            }//数据格式化
+		        },
+		    visualMap: {
+		        min: 0,
+		        max: max_num,
+		        left: 'left',
+		        top: 'bottom',
+		        text: ['高','低'],//取值范围的文字
+		        inRange: {
+		            color: ['white', '#ee6666']//取值范围的颜色
+		        },
+		        show:true//图注
+		    },
+		    geo: {
+		        map: 'china',
+		        roam: false,//不开启缩放和平移
+		        zoom:1.23,//视角缩放比例
+		        label: {
+		            normal: {
+		                show: true,
+		                fontSize:'12',
+		                color: 'rgba(0,0,0,0.7)'
+		            }
+		        },
+		        itemStyle: {
+		            normal:{
+		                borderColor: 'rgba(0,0,0,0.2)'
+		            },
+		            emphasis:{
+		                areaColor: 'rgba(0, 0, 0, 0.1)',//鼠标选择区域颜色
+		                shadowOffsetX: 0,
+		                shadowOffsetY: 0,
+		                shadowBlur: 20,
+		                borderWidth: 0,
+		                shadowColor: 'rgba(0, 0, 0, 0.5)'
+		            }
+		        }
+		    },
+		    series : [
+				{
+				    name: '发帖量',
+				    type: 'map',
+				    geoIndex: 0,
+					data:dataList,
+					
+				},
+						
+				
+		    ]
+		};
+		myChart.setOption(option);
+		
+		}
+	
+	</script>
+	
+	<script>
+		function checkcookie()
+		{
+						 this.setCookie = function(c_name,value,expiredays)
+						 {
+							   var exdate=new Date();
+							   exdate.setDate(exdate.getDate()+expiredays);
+							   document.cookie=c_name+ "=" +escape(value)+
+							   ((expiredays==null) ? "" : ";expires="+exdate.toGMTString()) + ";path=/"
+						 }
+		
+						 this.getCookie = function(userName)
+		    {
+		       if (document.cookie.length>0){
+		            c_start=document.cookie.indexOf(userName+ "=");
+		           if (c_start!=-1){
+		               c_start=c_start + userName.length+1;
+		               c_end=document.cookie.indexOf(";",c_start);
+		           if (c_end==-1){
+		                c_end=document.cookie.length;
+		           }
+		           return unescape(document.cookie.substring(c_start,c_end));
+		           }
+		       }
+		       return "";
+		   }
+		
+						this.check = function()
+						{
+						    userName = cookie_.getCookie('userName');
+							if(userName)
+							{
+							    $.ajax({
+							     url:"/check_statu/",
+							     type:"get",
+							     dataType:"json",
+							     data:{"cookie":userName},
+							     success:function (data) {
+									 if(data.statu){
+										 $("#user_name").text(data.user_name)
+										 produce_option(data.Ch_name)
+										 change_data()
+									 }
+									 else{
+										 alert("身份认证已失效，请重新登录")
+										 location.href="/sign/"
+									 }
+								}
+							    })
+							}
+							else
+							{
+								alert("身份认证已失效，请重新登录")
+								location.href="/sign/"
+							}
+						}
+		}
+		var cookie_=new checkcookie()
+		cookie_.check()
+		
+		//生成选项栏
+		function produce_option(Ch_name)
+		{
+			var parent = document.getElementsByClassName('select_select')[0]
+			
+			for (i in Ch_name)
+			{
+				var child = document.createElement("option")
+				child.innerText = Ch_name[i]
+				parent.appendChild(child)		
+			}
+		}
+		
+		
+		
+		//当前选项栏
+		var now_date = 0
+		
+		
+		
+		$(".data_select li").click(
+		function(){
+			$(this).addClass("hover")
+			$(this).siblings().removeClass("hover")
+			now_date = $(this).index()
+			
+			change_data()
+		})
+			
+		$(".select_select").change(
+		function()
+		{
+			change_data()
+		})
+		
+		function change_data()
+		{
+			option = $(".select_select").val()
+			
+			$.ajax({
+			     url:"/analysis_data/",
+			     type:"get",
+			     dataType:"json",
+			     data:{"cookie":userName,"Ch_name":option,"date": now_date},
+			     success:function (data) {
+					 if(data.statu == 1)
+					 {
+						 change_map1(data.grade,data.post_num,data.comment_num)
+						 change_map3(data.active_time)
+						 change_map4(data.hot_words)
+						 change_map5(data.sex_ration)
+						 change_map6(data.age)
+						 change_map7(data.map)
+					 }
+					 else{
+						 alert("数据不存在")
+					 }
+					 
+				}			
+			})
+		}
+		
+		function change_map1(grade,post,comment){
+			switch(now_date){
+				case 0:$(".map1 span").eq(0).text("近一周");break;
+				case 1:$(".map1 span").eq(0).text("近一月");break;
+				case 2:$(".map1 span").eq(0).text("ALL");break;
+			}
+
+			if(grade >0.85){
+				$(".map1 span").eq(6).text("优") 
+				$(".map1 span").eq(6).css('color','green') 
+			}
+			else if(grade >0.75){
+				$(".map1 span").eq(6).text("良") 
+				$(".map1 span").eq(6).css('color','black') 
+			}
+			else if(grade >0.7){
+				$(".map1 span").eq(6).text("中") 
+				$(".map1 span").eq(6).css('color','black') 
+			}
+			else{
+				$(".map1 span").eq(6).text("差") 
+				$(".map1 span").eq(6).css('color','red') 
+			}
+			sex(grade.toFixed(3))
+			$(".map1 span").eq(2).text(post)
+			$(".map1 span").eq(4).text(comment)
+		}
+		
+		function change_map3(array)
+		{
+			active(array['x'],array['y'])
+		}
+		
+		function change_map4(array)
+		{
+			hot_words(word_could(array))
+		}
+		
+		function change_map5(array)
+		{
+			sex_radio(array)
+		}
+		
+		function change_map6(array)
+		{
+		    age_dis(array)
+		}
+		
+		function change_map7(array)
+		{
+			
+			map(array,dict_getmax(array))
+		}
+		
+		function word_could(array)
+		{
+			max = array[0][1]
+			
+			size = 130/max
+			
+			for(var i=0;i<array.length;i++)
+			{
+				if(array[i][1]/max <0.2)
+				{
+					array[i][1]=array[i][1]*size*2
+				}
+				else{
+				array[i][1]=array[i][1]*size
+				}
+			}
+			return array
+		}
+		
+		//取字典最大值
+		function dict_getmax(dict){
+			for (var i in dict){
+				return dict[i]
+			}
+		}
+		
+		
+		    
+		
+		
+		
+		
+	</script>
+</html>

@@ -1,0 +1,455 @@
+<!DOCTYPE >
+<html>
+	
+	<head>
+		<meta charset="utf-8">
+		<script src="../templates/js/jquery.js"></script>
+		<script src="../templates/js/echarts.js"></script>
+		<script src="../templates/js/worldcloud.js"></script>
+		<script src="../templates/js/china.js"></script>
+	</head>
+	
+	<style>
+		/*公共属性*/
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		
+		a{text-decoration: none;color: black}
+		
+		ul,li{float: left;list-style-type: none;}
+		
+		div::-webkit-scrollbar{
+		  width:5px;
+		  height:0px;
+		}
+		
+		div::-webkit-scrollbar-thumb{
+		  background: gray;
+		  border-radius:10px;
+		}
+		
+		
+		.head_nav {
+			border-bottom: rgba(0,0,0,0.1) solid 1px;
+		}
+		
+		.head_nav .content{
+			width: 1426px;
+			margin: 0 auto;
+			padding-top: 20px;
+			
+		}
+		
+		.head_nav .content .content_img{
+			float: left;
+		}
+		
+		.head_nav .content .content_img img,span{
+			float: left;
+		}
+		
+		.head_nav .content .content_img span{
+			display: block;
+			padding-top: 17px;
+			margin-left: 15px;
+			font-size: 27px;
+			font-weight: bold;
+			padding-bottom: 25px;
+		}
+		
+		.head_nav .content .content_person{
+			float: right;
+		}
+		
+		.head_nav .content .content_person .search_box{
+			border: royalblue solid 1px;
+			border-radius: 5px 5px 5px 5px;
+			margin-top: 15px;
+			padding: 10px;
+			color: royalblue;
+			cursor: pointer;
+			float: left;
+			margin-right: 30px;
+		}
+		
+		.head_nav .content .content_person img{
+			float: left;
+		}
+		
+		
+		.person_info{
+			float: left;
+			margin-top: 13px;
+			margin-left: 30px;
+		}
+		
+		.person_info img{
+			
+			
+			width: 45px;
+			border-radius: 50%;
+		}
+		
+		.person_info .user_name
+		{
+			float: left;
+			margin-left: 20px;
+		}
+		
+	</style>
+	
+	<body>
+		<div class="head_nav">
+			<div class="content">
+				<div class="content_img">
+					<img src="../templates/images/head2.png"  width="60px"/>
+					<span>
+						微博超话舆情分析系统
+					</span>
+				</div>
+				
+				<div class="content_person">
+					<div class="search_box">
+						<span>&nbsp;&nbsp;我的账户&nbsp;&nbsp;</span>
+					</div>
+					
+					<img src="../templates/images/news.png" width="30px" style="margin-top: 20px;" />
+					
+					<div class="person_info">
+						<img src="../templates/images/head_img.jpg">
+						<div class="user_name">
+							<span style="font-weight: bold;display: block;" id="user_name">BanksY ol</span>
+							<br>
+							<span style="color: rgba(0,0,0,0.7);margin-top: 3px;">AHPU</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div style="clear: both;"></div>
+		</div>
+		
+		<style>
+			.select_board{
+				width: 1426px;
+				margin: 0 auto;
+			}
+			
+			.select_board ul{
+				float: left;
+			}
+			
+			.select_board li{
+				width: 100px;
+				margin-left: 30px;
+				line-height: 65px;
+				text-align: center;
+				color: rgba(0,0,0,0.7);
+				font-weight: 500;
+				cursor: pointer;
+			}
+			
+			.select_board .hover{
+				border-bottom: rgba(0,0,0,0.2) solid 2px;
+				color: royalblue;
+			}
+			
+			.search_fun{
+				float: right;
+				width: 290px;
+				height: 40px;
+				margin-top: 13px;
+				border: rgba(0,0,0,0.1) solid 1px;
+				border-radius: 2px 2px 2px 2px;
+			}
+			
+			.select_ul{
+				float: left;
+			}
+			
+			.input100
+			{
+				border: none;
+				outline: none;
+				text-transform: none;
+				overflow: visible;
+				background: transparent;
+				line-height: 40px;
+				font-size: 17px;
+				margin-bottom: 5px;
+				margin-left: 5px;
+				float: left;
+				color: rgba(0,0,0,0.6);
+			    width: 250px;
+			}
+			
+			.search_fun img{
+				
+				margin-top: 10px;
+				cursor: pointer;
+				width: 20px;
+				margin-left: 5px;
+			}
+			
+		</style>
+		
+		<div class="head_nav">
+			<div class="select_board">
+				<div class="select_ul">
+                   <ul>
+                   	  <a href="/table/"><li style="margin-left: 0;">首页</li></a>
+                   	  <a href="/hotspot/"><li>舆情关注热点</li></a>
+                   	  <a href="/view/"><li>信息概览</li></a>
+                   	  <a href="/analysis/"><li>超话分析</li></a>
+                   	  <a href="/testing/"><li>异常言论检测</li></a>
+                   	  <a href="/task/"><li class="hover">任务管理</li>  </a>
+                   	  <a href="/myaccount/"><li>我的账户</li></a>
+                   </ul>
+				</div>
+				
+				<div class="search_fun">
+					<input class="input100" type="text" name="resign_password_again" placeholder="Search...." autocomplete="off">
+					<img src="../templates/images/search.png">
+				</div>			
+			</div>
+			<div style="clear: both;"></div>
+		</div>
+		
+		<style>
+			.select_hover{
+				color: white;
+				font-size: 22px;
+				background-color: royalblue;
+			}
+			
+			.hover_{
+				background-color: #4169E1
+			}
+		</style>
+		
+		<div style="margin-top: 40px;">
+			<div style="margin: 0 auto;width: 1426px;height: 730px;border: rgba(0,0,0,0.2) solid 1px;">
+				<div style="float: left;width: 230px;height: 100%;background-color: darkslategrey;">
+					<div style="float: left;width: 100%;height: 80px;padding-top: 30px;color: white;font-size: 30px;">
+						<span style="float: left;padding-left: 10px;">任务面板</span>
+						<div style="float: right;width: 15px;margin-right: 30px;margin-top: 8px;cursor: pointer;">
+							<div style="width: 37px;height: 4px;background-color: white;"></div>
+							<div style="width: 37px;height: 4px;background-color: white;margin-top: 7px"></div>
+							<div style="width: 37px;height: 4px;background-color: white;margin-top: 7px"></div>
+						</div>
+					</div>
+					
+					<ul style="width: 100%;cursor: pointer;" id="task_ul">
+						<li style="width: 100%;" >
+							<a href="/task/">
+					<div style="float: left;width: 100%;font-size: 22px;color: white;border-radius: 10px 10px 10px 10px;">
+						<span style="text-align: center;width: 100%;line-height: 54px;">新建任务</span>
+					</div>
+					        </a>
+					    </li>
+						
+						<li style="width: 100%;margin-top: 20px;" class="hover_">
+							<a href="/task2/">
+					<div style="float: left;width: 100%;font-size: 22px;color: white;border-radius: 10px 10px 10px 10px;">
+						<span style="text-align: center;width: 100%;line-height: 54px;">管理任务</span>
+					</div>
+					        </a>
+					    </li>
+					</ul>
+				</div>
+				<div style="width: 1195px;height: 730px;float: left;overflow: hidden;">
+					<div style="width: 1195px;height:730px;overflow: hidden;float: left;" id="board">
+						
+						<div style="width: 1195px;height: 730px;float: left;">
+							<div style="width: 100%;height: 70px;float: left;box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1);">
+								<div style="height: 50px;margin-top: 15px;font-size: 20px;">
+									<img src="../templates/images/11.png" style="width: 50px;margin-left: 30px;float: left;">
+									<span style="float: left;line-height: 50px;font-weight: bold;margin-left: 10px;color: #4169E1;">我的任务</span>
+								</div>
+								<div style="float: left;width: 100%;height: 20px;color: rgba(0,0,0,0.5);padding-top: 10px;padding-bottom: 20px;">
+									<span style="float: left;margin-left: 70px;">任务名称</span>
+									<span style="float: left;margin-left: 230px;">创建时间</span>
+									<span style="float: left;margin-left: 230px;">更新时间</span>
+									<span style="float: left;margin-left: 150px;">状态</span>
+									<span style="float: left;margin-left: 140px;">暂停/删除</span>
+								</div>
+									
+								<div style="float: left;width: 100%;height: 620px;">
+									<style>
+										.ulca{
+											float: left;
+											width: 100%;
+										}
+										.ulca li{
+											float: left;
+											width: 96%;
+											height: 40px;
+											margin-left: 2%;
+											margin-bottom: 5px;
+											border-bottom: rgba(0,0,0,0.1) solid 1px;
+											color: rgba(0,0,0,0.7);
+										}
+									</style>
+									<ul class="ulca" id="ulca">
+										<li class="ulli" style="display: none;">
+										    <span style="line-height: 40px;width: 200px;margin-left: 30px;">中国科学技术大学	</span>
+											<span style="line-height: 40px;width: 200px;margin-left: 90px;">2021-3-5 16:43</span>
+											<span style="line-height: 40px;width: 200px;margin-left: 90px;">暂无更新时间</span>
+											<span style="line-height: 40px;width: 70px;margin-left: 25px;text-align: center;border-radius: 10px 10px 10px 10px;margin-top: 5px;"><img src="../templates/images/14.png" style="width: 25px;"></span>
+											<span style="line-height: 35px;width: 50px;background-color: #808080;margin-left: 90px;margin-top: px;text-align: center;color: white;background-color: rgba(0,0,0,0.2);border-radius: 5px 5px 5px 5px;cursor: pointer;" class="statu1">开启</span>
+											<span style="line-height: 35px;width: 50px;background-color: #808080;margin-left: 10px;text-align: center;color: white;background-color: red;border-radius: 5px 5px 5px 5px;cursor: pointer;" class="statu2">删除</span>
+										</li>
+										
+										
+									</ul>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+				
+				
+				
+
+				
+				
+			</div>
+			
+		</div>
+	</body>
+	<script>
+		function clickfun(){
+			$(".statu1").click(
+			function(){
+				 if($(this).parent().children('span').eq(4).text() == '暂停')
+				 {
+					 var statu = 0
+					 alert("暂停成功")
+				 }
+				 else{
+					 var statu =1
+					 alert("开启成功")
+					 
+				 }
+
+				 
+				 $.ajax({
+				      url:"/change_task_statu/",
+				      type:"get",
+				      dataType:"json",
+				      data:{'Ch_name':$(this).parent().children('span').eq(0).text(),'statu':statu},
+				      success:function (data) {
+						  location.href="/task2/"
+				 		 
+				 	}			
+				 })	 
+			}
+			)
+		}
+		
+		function insert_task_queue(data){
+			for(var i = 0; i < data.length ; i++)
+			{
+				parent = document.getElementById("ulca")
+				s = document.getElementsByClassName("ulli")[0].cloneNode(true)
+				s.style.display = 'block'
+				parent.appendChild(s)
+				
+				$(".ulli").eq(i+1).children('span').eq(0).text(data[i][0])
+				$(".ulli").eq(i+1).children('span').eq(1).text(data[i][2])
+				$(".ulli").eq(i+1).children('span').eq(2).text(data[i][4])
+				if(data[i][3] == 1)
+				{
+					$(".ulli").eq(i+1).children('span').eq(3).children('img').attr('src','../templates/images/12.png')
+					$(".ulli").eq(i+1).children('span').eq(4).text('暂停')
+					$(".ulli").eq(i+1).children('span').eq(4).css('background','#4169E1')
+				}
+				
+				if(data[i][3] == 0)
+				{
+					$(".ulli").eq(i+1).children('span').eq(3).children('img').attr('src','../templates/images/14.png')
+					$(".ulli").eq(i+1).children('span').eq(4).text('开始')
+					$(".ulli").eq(i+1).children('span').eq(4).css('background','rgba(0,0,0,0.2)')
+				}
+			}
+			clickfun()
+		}
+		
+		
+		
+		function checkcookie()
+		{
+						 this.setCookie = function(c_name,value,expiredays)
+						 {
+							   var exdate=new Date();
+							   exdate.setDate(exdate.getDate()+expiredays);
+							   document.cookie=c_name+ "=" +escape(value)+
+							   ((expiredays==null) ? "" : ";expires="+exdate.toGMTString()) + ";path=/"
+						 }
+		
+						 this.getCookie = function(userName)
+		    {
+		       if (document.cookie.length>0){
+		            c_start=document.cookie.indexOf(userName+ "=");
+		           if (c_start!=-1){
+		               c_start=c_start + userName.length+1;
+		               c_end=document.cookie.indexOf(";",c_start);
+		           if (c_end==-1){
+		                c_end=document.cookie.length;
+		           }
+		           return unescape(document.cookie.substring(c_start,c_end));
+		           }
+		       }
+		       return "";
+		   }
+		
+						this.check = function()
+						{
+						    userName = cookie_.getCookie('userName');
+							if(userName)
+							{
+							    $.ajax({
+							     url:"/check_statu/",
+							     type:"get",
+							     dataType:"json",
+							     data:{"cookie":userName},
+							     success:function (data) {
+									 if(data.statu){
+										 $("#user_name").text(data.user_name)
+										 get_task_info()
+									 }
+									 else{
+										 alert("身份认证已失效，请重新登录")
+										 location.href="/sign/"
+									 }
+								}
+							    })
+							}
+							else
+							{
+								alert("身份认证已失效，请重新登录")
+								location.href="/sign/"
+							}
+						}
+		}
+		var cookie_=new checkcookie()
+		cookie_.check()
+		
+		function get_task_info()
+		{
+			$.ajax({
+			     url:"/get_task_queue/",
+			     type:"get",
+			     dataType:"json",
+			     data:{"cookie":userName},
+			     success:function (data) {
+					 insert_task_queue(data.data)
+					 
+				}			
+			})
+		}
+	</script>
+	
+</html>

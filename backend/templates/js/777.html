@@ -1,0 +1,66 @@
+<!DOCTYPE >
+<html>
+	<head>
+	</head>
+	<style>
+		/*************修改滑轮形状***************/
+		div::-webkit-scrollbar{
+		  width:5px;
+		  height:0px;
+		}
+		
+		div::-webkit-scrollbar-thumb{
+		  background: gray;
+		  border-radius:10px;
+		}
+		
+		/***************************************/
+        
+				
+		.border{
+			width: 500px;height: 700px;border: aqua solid 1px;overflow: scroll;
+		}
+		
+		.comment{
+			width: 100%;height: 100px;border: chartreuse solid 1px;display: none;
+		}
+	</style>
+	<body>
+		
+		<div class="border" id="border">
+		    <div  class="comment">
+				
+			</div>	
+		</div>
+		
+		<input style="width: 300px;height: 200px;" name="button">
+		
+		<button onclick="add()">添加</button>
+		
+	<body>
+		
+	<script type="text/javascript">
+		
+		
+		function add()
+		{
+			// 获取评论面板
+			parent = document.getElementById('border')
+			
+			//生成新的div （复制了评论的格式）
+			s = document.getElementsByClassName('comment')[0].cloneNode(true)
+			
+			//将Input 中内容加入新生成的div中
+			s.innerHTML = document.getElementsByName('button')[0].value
+			
+			//修改div 属性为可见
+			s.style.display = 'block'
+			
+			//将div 插入的父级元素（评论面板）中
+			parent.appendChild(s)
+		}
+		
+		
+	</script>
+
+</html>

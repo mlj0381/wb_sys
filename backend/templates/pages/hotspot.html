@@ -1,0 +1,705 @@
+<!DOCTYPE >
+<html>
+	
+	<head>
+		<meta charset="utf-8">
+		<script src="../templates/js/jquery.js"></script>
+		<script src="../templates/js/echarts.js"></script>
+		<script src="../templates/js/worldcloud.js"></script>
+		<script src="../templates/js/china.js"></script>
+	</head>
+	
+	<style>
+		/*公共属性*/
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		
+		ul,li{float: left;list-style-type: none;}
+		a{text-decoration: none;color: black}
+		
+		div::-webkit-scrollbar{
+		  width:5px;
+		  height:0px;
+		}
+		
+		div::-webkit-scrollbar-thumb{
+		  background: gray;
+		  border-radius:10px;
+		}
+		
+		
+		.head_nav {
+			border-bottom: rgba(0,0,0,0.1) solid 1px;
+		}
+		
+		.head_nav .content{
+			width: 1426px;
+			margin: 0 auto;
+			padding-top: 20px;
+			
+		}
+		
+		.head_nav .content .content_img{
+			float: left;
+		}
+		
+		.head_nav .content .content_img img,span{
+			float: left;
+		}
+		
+		.head_nav .content .content_img span{
+			display: block;
+			padding-top: 17px;
+			margin-left: 15px;
+			font-size: 27px;
+			font-weight: bold;
+			padding-bottom: 25px;
+		}
+		
+		.head_nav .content .content_person{
+			float: right;
+		}
+		
+		.head_nav .content .content_person .search_box{
+			border: royalblue solid 1px;
+			border-radius: 5px 5px 5px 5px;
+			margin-top: 15px;
+			padding: 10px;
+			color: royalblue;
+			cursor: pointer;
+			float: left;
+			margin-right: 30px;
+		}
+		
+		.head_nav .content .content_person img{
+			float: left;
+		}
+		
+		
+		.person_info{
+			float: left;
+			margin-top: 13px;
+			margin-left: 30px;
+		}
+		
+		.person_info img{
+			
+			
+			width: 45px;
+			border-radius: 50%;
+		}
+		
+		.person_info .user_name
+		{
+			float: left;
+			margin-left: 20px;
+		}
+		
+	</style>
+	
+	<body>
+		<div class="head_nav">
+			<div class="content">
+				<div class="content_img">
+					<img src="../templates/images/head2.png"  width="60px"/>
+					<span>
+						微博超话舆情分析系统
+					</span>
+				</div>
+				
+				<div class="content_person">
+					<div class="search_box">
+						<span>&nbsp;&nbsp;我的账户&nbsp;&nbsp;</span>
+					</div>
+					
+					<img src="../templates/images/news.png" width="30px" style="margin-top: 20px;" />
+					
+					<div class="person_info">
+						<img src="../templates/images/head_img.jpg">
+						<div class="user_name">
+							<span style="font-weight: bold;display: block;" id="user_name">BanksY ol</span>
+							<br>
+							<span style="color: rgba(0,0,0,0.7);margin-top: 3px;">AHPU</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div style="clear: both;"></div>
+		</div>
+		
+		<style>
+			.select_board{
+				width: 1426px;
+				margin: 0 auto;
+			}
+			
+			.select_board ul{
+				float: left;
+			}
+			
+			.select_board li{
+				width: 100px;
+				margin-left: 30px;
+				line-height: 65px;
+				text-align: center;
+				color: rgba(0,0,0,0.7);
+				font-weight: 500;
+				cursor: pointer;
+			}
+			
+			.select_board .hover{
+				border-bottom: rgba(0,0,0,0.2) solid 2px;
+				color: royalblue;
+			}
+			
+			.search_fun{
+				float: right;
+				width: 290px;
+				height: 40px;
+				margin-top: 13px;
+				border: rgba(0,0,0,0.1) solid 1px;
+				border-radius: 2px 2px 2px 2px;
+			}
+			
+			.select_ul{
+				float: left;
+			}
+			
+			.input100
+			{
+				border: none;
+				outline: none;
+				text-transform: none;
+				overflow: visible;
+				background: transparent;
+				line-height: 40px;
+				font-size: 17px;
+				margin-bottom: 5px;
+				margin-left: 5px;
+				float: left;
+				color: rgba(0,0,0,0.6);
+			    width: 250px;
+			}
+			
+			.search_fun img{
+				
+				margin-top: 10px;
+				cursor: pointer;
+				width: 20px;
+				margin-left: 5px;
+			}
+			
+		</style>
+		
+		<div class="head_nav">
+			<div class="select_board">
+				<div class="select_ul">
+                   <ul>
+                   	  <a href="/table/"><li style="margin-left: 0;">首页</li></a>
+                   	  <a href="/hotspot/"><li  class="hover">舆情关注热点</li></a>
+                   	  <a href="/view/"><li>信息概览</li></a>
+                   	  <a href="/analysis/"><li>超话分析</li></a>
+                   	  <a href="/testing/"><li>异常言论检测</li></a>
+                   	  <a href="/task/"><li>任务管理</li>  </a>
+                   	  <a href="/myaccount/"><li>我的账户</li></a>
+                   </ul>
+				</div>
+				
+				<div class="search_fun">
+					<input class="input100" type="text" name="resign_password_again" placeholder="Search...." autocomplete="off">
+					<img src="../templates/images/search.png">
+				</div>			
+			</div>
+			<div style="clear: both;"></div>
+		</div>
+		
+		<style>
+			.active_board{
+				
+			}
+			
+			.active_board_main{
+				width: 1426px;
+				height: 750px;
+				margin: 0 auto;
+				padding-top: 20px;
+				
+			}
+			.active_board_select{
+				float: left;
+				width: 100%;
+				height: 80px;
+				box-shadow: 0 0.8px 2px 0 gray;
+				
+			}
+			
+			.active_board_select select{
+				  width: 130px;
+				  height: 28px;
+				  font-size: 15px;
+			}
+			
+			.active_board_select ul{
+				margin-right: 20px;
+				cursor: pointer;
+			}
+			
+			.active_board_select li{
+				width: 85px;
+				line-height: 45px;
+				text-align: center;
+				border: rgba(0,0,0,0.3) solid 1px;
+			}
+			
+			.active_board_select .hover{
+				background-color: cornflowerblue;
+				color: white;
+			}
+			
+		</style>
+		
+		<div class="active_board">
+			<div class="active_board_main">
+				<div class="active_board_select">
+					<div style="float: left; width: 300px;padding-top: 20px;font-size: 20px;padding-left: 20px;">
+						<span>选择超话：</span>
+						<select id="ch_select">
+							<option >全部</option>
+	
+						</select>
+					</div>
+					
+					<div style="float: right;padding-top: 10px;">
+						<ul id="date_ul">
+							<li class="hover">近一周</li>
+							<li>近一月</li>
+							<li>ALL</li>
+						</ul>
+					</div>
+				</div>
+				
+				<style>
+					.main_show{
+						float: right;
+						height: 615px;
+						width: 47%;
+						border: rgba(0,0,0,0.2) solid 1px;
+					}
+					.main_show .nav{
+						float: left;
+						width: 100%;
+						height: 50px;
+						border-bottom: rgba(0,0,0,0.2) solid 1px;
+					}
+					
+					.main_show .nav span{
+						line-height: 50px;
+						padding-left: 10px;
+						color: rgba(0,0,0,0.7);
+						
+					}
+				</style>
+				<div style="width: 100%;height: 620px;float: left;margin-top: 50px;border: rgba(0,0,0,0.1) solid 1px;">
+					<div style="float: left;height: 530px;width: 50%;" id="board1">
+					</div>
+
+					
+					<div class="main_show" id="main_show">
+						<div class="nav">
+							<span>含有关键词言论的微博</span>
+							<span style="float: right;margin-right: 50px;font-size: 30px;" id="key2">放假</span>
+							<span style="float: right;">当前关键词：</span>
+						</div>
+						<div style="float: left;width: 100%;height: 552px;margin-top: 10px;overflow: scroll;" id="board">
+							
+							<style>
+								.box_one{
+									float: left;
+									width: 98%;
+									margin-top: 10px;
+									border: rgba(0,0,0,0.1) solid 1px;
+									margin-left: 1%;
+								}
+								
+								.box_one .board{
+									float: left;
+									height: 40px;
+									padding: 5px;
+									width: 100%;
+								}
+								.box_one_img1{
+									width: 40px;
+									border-radius: 50%;
+									float: left;
+								}
+								.name{
+									float: left;
+									line-height: 40px;
+									margin-left: 20px;
+									font-size: 20px;
+								}
+								.box_one_content{
+									float: left;
+									width: 100%;
+									color: dimgrey;
+								}
+								
+								.text_board{
+									float: left;
+									height: 38px;
+									width: 100%;
+									padding-top: 10px;
+									padding-left: 5px;
+									margin-bottom: 1px;
+								}
+								
+								.text{
+									float: left;
+									height: 60px;
+									width: 47%;
+									margin-top: 25px;
+									padding-left: 50px;
+								}
+								
+								.good1{
+									float: left;
+									height: 10px;
+									width: 550px;
+									background-color: #FA8072;
+									margin-top: 15px;
+									border-radius: 5px 5px 5px 5px;
+									overflow: hidden;
+								}
+								
+								.good2
+								{
+									float: left;
+									height: 10px;
+									width: 550px;
+									background-color: #98FB98;
+									margin-left: -550px;
+									border-radius: 5px 5px 5px 5px;
+								}
+								
+								.good_number{
+									line-height: 30px;
+									font-weight: 600;
+									font-size: 28px;
+									margin-left: 25px;
+								}
+								
+								.text_content{
+									font-size: 19px;
+									float: left;
+									padding-top: 10px;
+									padding-bottom: 10px;
+								}
+							</style>
+							<div class="box_one" style="display: none;">
+								<div class="board">
+									<img src="https://tvax3.sinaimg.cn/crop.0.0.1080.1080.1024/48f122e6ly8g5kqpw43bjj20u00u0tb8.jpg?KID=imgbed,tva&Expires=1617453839&ssig=DrbJ9JnTig"
+									class="box_one_img1">
+									<a target="_blank"><span class="name">林心如</span></a>
+									<div style="float: right;padding: 1px;cursor: pointer;margin-right: 5px;">
+										<a target="_blank">
+										    <span style="float: left;line-height: 30px;font-size: 20px;color: #6495ED;">查看原文</span>
+									        <img src="../templates/images/right.png" / style="float: left;width: 30px;">
+										</a>
+									</div>
+								</div>
+								
+								<div class="box_one_content" >
+									<span class="text_content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;很多人把假期带不带电脑直接等同于假期要不要工作，但其实，我问了身边的一些朋友，他们很多人并不拒绝假期处理一点工作上的紧急事务，他们只是拒绝在假期不论何时何地都背着一台沉重的电脑，不管是旅行还是约会都太不方便，而且看着身旁的电脑，就无心放假，太容易出戏了。</span>
+								</div>
+								
+								<div class="text_board">
+									<span>当前超话:&nbsp;&nbsp;</span>
+									<span style="color: #4169E1;">中国科学技术大学</span>
+									<span style="margin-left: 15px;">发帖日期:&nbsp;&nbsp;</span>
+									<span style="color: #4169E1;">2020-2-3 15:61</span>
+									<span style="margin-left: 15px;">转发: </span>
+									<span style="color: #4169E1;">99</span>
+									<span style="margin-left: 10px;">评论: </span>
+									<span style="color: #4169E1;">505</span>
+									<span style="margin-left: 10px;">点赞: </span>
+									<span style="color: #4169E1;">9999</span>
+								</div>
+							</div>
+							
+
+							
+							
+							
+						</div>
+						
+					</div>
+					<div class="text">
+						<div style="float: left;height: 30px;">
+							<span style="font-size: 20px;">关键词：</span>
+							<span style="font-size: 20px;margin-left: 10px;" id="key1">无</span>
+							<span style="font-size: 20px;margin-left: 40px;"> 用户态度&nbsp;&nbsp;&nbsp; </span>
+							<span style="line-height: 30px;color: rgba(0,0,0,0.3);">(指该关键词用户发帖 积极和中性帖子/帖子总数)</span>
+						</div>
+						
+						<div class="good1">
+							<div class="good2" id="attitude"></div>
+						</div>
+						
+						<span class="good_number" id="good_number"> 87%</span>
+					</div>
+				</div>
+				
+			</div>	
+		</div>
+		<script>
+			function ssss(array)
+			 {
+				  var myChart = echarts.init(document.getElementById('board1'));
+				           option = {
+				               dataset: {
+				                   source:array,
+								  
+								  
+				               },
+				               grid: {
+								   left: '3%',
+								   right: '7%',  
+								   bottom: '10%', 
+								   top:'7%',
+								   containLabel: true},
+				               xAxis: {name: 'amount',
+							           axisLabel: {
+							               show: true,
+							               textStyle: {
+										   fontSize:16,
+										   }
+							           
+							   }},
+				               yAxis: {type: 'category',
+							          axisLabel: {
+							              show: true,
+							              textStyle: {
+							          	  fontSize:18,
+							          	}}
+										
+									  },
+				               visualMap: {
+				                   orient: 'horizontal',
+				                   left: 'center',
+				                   min: 10,
+				                   max: 100,
+				                   text: ['High Score', 'Low Score'],
+				                   // Map the score column to color
+				                   dimension: 0,
+				                   inRange: {
+				                       color: ['#D7DA8B', '#E15457']
+				                   }
+				               },
+				               series: [
+				                   {
+				                       type: 'bar',
+				                       encode: {
+				                           // Map the "amount" column to X axis.
+				                           x: 'amount',
+				                           // Map the "product" column to Y axis
+				                           y: 'product'
+				                       },
+									
+				                   }
+				               ]
+				           };
+				  myChart.setOption(option);
+				  
+				  //后期需要写
+                  myChart.on('click',  function(param) {
+                  get_iniv_data(param.name)
+				  $("#key1").text(param.name)
+				  $("#key2").text(param.name)
+				  var number  = parseInt(Math.round(Math.random()*120)+-150)
+				  $("#attitude").stop(true,true).animate({marginLeft:number},500)
+				  $("#good_number").text(90+number/10 + '%')
+				  })
+
+			}
+			
+		</script>
+	</body>
+	<script>
+		function checkcookie()
+		{
+						 this.setCookie = function(c_name,value,expiredays)
+						 {
+							   var exdate=new Date();
+							   exdate.setDate(exdate.getDate()+expiredays);
+							   document.cookie=c_name+ "=" +escape(value)+
+							   ((expiredays==null) ? "" : ";expires="+exdate.toGMTString()) + ";path=/"
+						 }
+		
+						 this.getCookie = function(userName)
+		    {
+		       if (document.cookie.length>0){
+		            c_start=document.cookie.indexOf(userName+ "=");
+		           if (c_start!=-1){
+		               c_start=c_start + userName.length+1;
+		               c_end=document.cookie.indexOf(";",c_start);
+		           if (c_end==-1){
+		                c_end=document.cookie.length;
+		           }
+		           return unescape(document.cookie.substring(c_start,c_end));
+		           }
+		       }
+		       return "";
+		   }
+		
+						this.check = function()
+						{
+						    userName = cookie_.getCookie('userName');
+							if(userName)
+							{
+							    $.ajax({
+							     url:"/check_statu/",
+							     type:"get",
+							     dataType:"json",
+							     data:{"cookie":userName},
+							     success:function (data) {
+									 if(data.statu){
+										 $("#user_name").text(data.user_name)
+										  produce_option(data.Ch_name)
+									 }
+									 else{
+										 alert("身份认证已失效，请重新登录")
+										 location.href="/sign/"
+									 }
+								}
+							    })
+							}
+							else
+							{
+								alert("身份认证已失效，请重新登录")
+								location.href="/sign/"
+							}
+						}
+		}
+		var cookie_=new checkcookie()
+		cookie_.check()
+		
+		function produce_option(Ch_name)
+		{
+			var parent = document.getElementById("ch_select")
+			
+			for (i in Ch_name)
+			{
+				var child = document.createElement("option")
+				child.innerText = Ch_name[i]
+				parent.appendChild(child)		
+			}
+			ul_click()
+		}
+		
+		now_date = 0
+		iniv_post = []
+		
+		
+		function ul_click(){
+			$("#date_ul li").click(
+			function(){
+				now_date = $(this).index()
+				$(this).addClass("hover")
+				$(this).siblings().removeClass("hover")
+				get_img_data()
+				get_iniv_data('')
+			})
+		}
+		
+		$("#ch_select").change(
+		function(){
+			// $("#ch_select").val()
+			get_img_data()
+			get_iniv_data('')
+			
+		})
+		
+		function get_img_data(){
+			var Ch_name = $("#ch_select").val()
+			var date = now_date
+			$.ajax({
+			 url:"/hot_data/",
+			 type:"get",
+			 dataType:"json",
+			 data:{"cookie":userName,"Ch_name":Ch_name,"date":date},
+			 success:function (data) {
+				 array = data.data
+				 change_img(array)
+				 get_iniv_data('')
+				 
+			}
+			})
+		}
+		
+		function change_img(array){
+			array[0] = ['score', 'amount', 'product']
+			ssss(array)
+		}
+		
+		function get_iniv_data(key_word){
+			var option = $("#ch_select").val()
+			
+			$.ajax({
+			 url:"/testing_data/",
+			 type:"get",
+			 dataType:"json",
+			 data:{"cookie":userName,"Ch_name":option,"date": now_date+2,"attitude":0,"key_word":key_word,"page":0},
+			 success:function (data) {
+				 clone_iniv(data.data)
+				 $('#main_show').animate({ scrollTop: 0 }, 300);
+				 
+				 
+				 
+			}
+			})
+			
+		}
+		
+		function clone_iniv(data)
+		{
+			for(var i =0 ;i< iniv_post.length;i++)
+			{
+				var t = document.getElementById("board")
+				if(iniv_post[i]!=null)
+				{
+				    t.removeChild(iniv_post[i])
+				}
+			}
+			
+			while(iniv_post.length > 0) {
+			        iniv_post.pop(); 
+					}
+			
+			for(var i =0 ; i < data.length ; i++)
+			{
+			    parent = document.getElementById("board")
+			    s = document.getElementsByClassName("box_one")[0].cloneNode(true)
+				iniv_post[i] = s
+				s.style.display = 'block'
+			    parent.appendChild(s)
+				$(".box_one img").eq((i+1)*2).attr('src',data[i]['iniv_post_img']);
+				$(".box_one span").eq((i+1)*13).text(data[i]['iniv_post_name'])
+				$(".box_one a").eq((i+1)*2).attr('href','https://weibo.com/u/' + data[i]['iniv_post_id']);
+				$(".box_one a").eq((i+1)*2+1).attr('href',data[i]['iniv_url']);
+				$(".box_one span").eq((i+1)*13+2).text(data[i]['iniv_content_text'])
+				$(".box_one span").eq((i+1)*13+4).text(data[i]['Ch_name'])
+				$(".box_one span").eq((i+1)*13+6).text(data[i]['iniv_date'])
+				$(".box_one span").eq((i+1)*13+8).text(data[i]['iniv_forward_num'])
+				$(".box_one span").eq((i+1)*13+10).text(data[i]['iniv_comment_num'])
+				$(".box_one span").eq((i+1)*13+12).text(data[i]['iniv_prase_num'])
+
+			}
+		}
+		
+		get_img_data()
+	</script>
+	
+	
+</html>
